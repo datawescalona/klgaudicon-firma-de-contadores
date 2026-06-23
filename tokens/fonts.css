@@ -1,0 +1,7 @@
+/* KLG AUDICON — Webfonts
+   NOTE: These are Google Fonts substitutes. The logo wordmark uses a
+   proprietary geometric sans (chunky, rounded terminals, dotted "i").
+   Space Grotesk is the closest avant-garde technical match for display;
+   Manrope covers UI/body; JetBrains Mono carries tabular financial figures.
+   Replace with the licensed brand font if/when provided. */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');

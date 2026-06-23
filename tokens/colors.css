@@ -1,0 +1,88 @@
+/* KLG AUDICON — Color tokens
+   "Corporate Avant-Garde": deep cobalt authority, off-white canvas,
+   bronze conversion accents, cyan technical highlight. */
+:root {
+  /* ---- Brand core (sampled from logo) ---- */
+  --cobalt-900: #161B6E;
+  --cobalt-800: #20289A;
+  --cobalt-700: #2C38B8;   /* PRIMARY — logo box blue */
+  --cobalt-600: #3A47CF;
+  --cobalt-500: #4F5BE0;
+  --cobalt-400: #7A84EC;
+  --cobalt-200: #C3C8F6;
+  --cobalt-100: #E4E6FB;
+  --cobalt-050: #F1F2FD;
+
+  /* ---- Deep ink-navy — serious dark surfaces ---- */
+  --navy-950: #070A18;     /* near-black hero/footer */
+  --navy-900: #0C1230;
+  --navy-800: #131C44;
+  --navy-700: #1B2657;
+
+  /* ---- Cyan — restrained technical highlight (logo variant) ---- */
+  --cyan-600: #0E84A8;
+  --cyan-500: #1597C0;     /* used sparingly, deepened (no pastel) */
+  --cyan-300: #7FC4DA;
+  --cyan-100: #DCEBF1;
+
+  /* ---- Gold — refined premium accent / CTA ---- */
+  --gold-700: #8A6A2E;
+  --gold-600: #A8844A;     /* CTA base — deep champagne, not orange */
+  --gold-500: #C2A263;
+  --gold-300: #DCC79A;
+  --gold-100: #F1E9D8;
+  /* legacy bronze aliases */
+  --bronze-700: var(--gold-700);
+  --bronze-600: var(--gold-600);
+  --bronze-500: var(--gold-500);
+  --bronze-300: var(--gold-300);
+  --bronze-100: var(--gold-100);
+
+  /* ---- Ink & neutrals ---- */
+  --ink-900: #14151B;      /* near-black text */
+  --ink-700: #2C2F3A;
+  --ink-500: #545967;      /* line-art icon gray */
+  --ink-400: #7A8090;
+  --ink-300: #A8AEBC;
+  --ink-200: #D2D6DF;
+  --ink-100: #E8EAEF;
+
+  /* ---- Canvas — cool, corporate, modern ---- */
+  --hueso: #F4F6FA;        /* base background (cool light gray) */
+  --hueso-deep: #E9EDF4;
+  --paper: #FFFFFF;
+
+  /* ---- Feedback ---- */
+  --success: #2E8B57;
+  --warning: #C9881F;
+  --danger:  #C0392B;
+  --whatsapp: #25D366;
+
+  /* ================= Semantic aliases ================= */
+  --bg-canvas: var(--hueso);
+  --bg-surface: var(--paper);
+  --bg-sunken: var(--hueso-deep);
+  --bg-inverse: var(--navy-950);
+  --surface-dark: var(--navy-900);
+
+  --text-strong: var(--ink-900);
+  --text-body: var(--ink-700);
+  --text-muted: var(--ink-400);
+  --text-on-cobalt: #FFFFFF;
+  --text-on-bronze: #FFFFFF;
+  --text-link: var(--cobalt-700);
+
+  --brand-primary: var(--cobalt-700);
+  --brand-primary-hover: var(--cobalt-800);
+  --brand-accent: var(--gold-600);
+  --cta: var(--gold-600);
+  --cta-hover: var(--gold-700);
+
+  --border-subtle: var(--ink-100);
+  --border-default: var(--ink-200);
+  --border-strong: var(--ink-900);
+  --focus-ring: var(--cobalt-500);
+
+  --icon-default: var(--ink-500);
+  --icon-strong: var(--ink-900);
+}
