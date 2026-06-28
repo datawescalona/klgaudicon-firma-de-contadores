@@ -1,0 +1,28 @@
+// KLG AUDICON — botón flotante de WhatsApp (componente compartido).
+// Inyectado en runtime por cada página vía loader XHR. Editar SOLO aquí.
+const { WhatsAppFab } = window.DesignSystem_b17006;
+
+function FloatingWA() {
+  // Oculto mientras el banner (hero oscuro) es visible Y al llegar al footer.
+  const [show, setShow] = React.useState(false);
+  React.useEffect(() => {
+    const onScroll = () => {
+      const pastBanner = window.scrollY > window.innerHeight * 0.7;
+      const footer = document.querySelector('footer[data-nav-theme]');
+      let footerVisible = false;
+      if (footer) { const r = footer.getBoundingClientRect(); footerVisible = r.top < window.innerHeight - 40; }
+      setShow(pastBanner && !footerVisible);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); };
+  }, []);
+  return (
+    <div style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 60, opacity: show ? 1 : 0, transform: show ? 'translateY(0)' : 'translateY(24px)', pointerEvents: show ? 'auto' : 'none', transition: 'opacity 360ms var(--ease-out), transform 360ms var(--ease-out)' }}>
+      <WhatsAppFab position="static" className="klg-wa-pulse" phone="+58 412 1234567" label="Agendar Reunión" message="Hola KLG, quiero agendar una reunión." />
+    </div>
+  );
+}
+
+Object.assign(window, { FloatingWA });
