@@ -1,0 +1,19 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Semantic & Feedback" subtitle="Status colors and the WhatsApp brand green" -->
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8" /><link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin:0; padding:20px; background:var(--paper); }
+  .row { display:flex; gap:12px; }
+  .chip { flex:1; border-radius:var(--radius-md); padding:14px; box-shadow:var(--shadow-xs); }
+  .chip .d { width:22px; height:22px; border-radius:6px; margin-bottom:10px; }
+  .chip .n { font-family:var(--font-sans); font-weight:700; font-size:13px; color:var(--text-strong); }
+  .chip .h { font-family:var(--font-mono); font-size:11px; color:var(--text-muted); }
+</style></head>
+<body>
+<div class="row">
+  <div class="chip"><div class="d" style="background:var(--success)"></div><div class="n">Success</div><div class="h">#2E8B57</div></div>
+  <div class="chip"><div class="d" style="background:var(--warning)"></div><div class="n">Warning</div><div class="h">#C9881F</div></div>
+  <div class="chip"><div class="d" style="background:var(--danger)"></div><div class="n">Danger</div><div class="h">#C0392B</div></div>
+  <div class="chip"><div class="d" style="background:var(--whatsapp)"></div><div class="n">WhatsApp</div><div class="h">#25D366</div></div>
+</div>
+</body></html>

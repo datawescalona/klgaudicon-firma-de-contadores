@@ -1,0 +1,26 @@
+/* KLG AUDICON — buttons.css
+   Animaciones de atención para CTAs (los estilos base del botón se aplican inline en el componente Button).
+   Botón flotante de WhatsApp + badge "24h". */
+
+@keyframes klgWaPulse {
+  0%   { box-shadow: 0 8px 22px rgba(37,211,102,0.35), 0 0 0 0 rgba(37,211,102,0.45); }
+  70%  { box-shadow: 0 8px 22px rgba(37,211,102,0.35), 0 0 0 16px rgba(37,211,102,0); }
+  100% { box-shadow: 0 8px 22px rgba(37,211,102,0.35), 0 0 0 0 rgba(37,211,102,0); }
+}
+.klg-wa-pulse { animation: klgWaPulse 2.4s var(--ease-out) infinite; }
+.klg-wa-pulse:hover { animation-play-state: paused; }
+
+@keyframes klgBadgeGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(168,132,74,0.0); transform: scale(1); }
+  50%      { box-shadow: 0 0 0 4px rgba(168,132,74,0.22); transform: scale(1.05); }
+}
+.klg-badge-pulse { animation: klgBadgeGlow 2s var(--ease-out) infinite; }
+
+/* Destello tenue y lento para CTA "Solicitar una cita" — sin aturdir */
+@keyframes klgPulseSoft {
+  0%, 100% { box-shadow: 0 6px 18px rgba(168,132,74,0.34), 0 0 0 0 rgba(194,162,99,0.0); }
+  50%      { box-shadow: 0 8px 22px rgba(168,132,74,0.46), 0 0 0 6px rgba(194,162,99,0.16); }
+}
+.klg-pulse-soft { animation: klgPulseSoft 3.6s ease-in-out infinite; }
+.klg-pulse-soft:hover { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .klg-pulse-soft { animation: none !important; } }

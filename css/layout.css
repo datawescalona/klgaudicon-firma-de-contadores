@@ -1,0 +1,78 @@
+/* KLG AUDICON — layout.css
+   Reset, elementos base, helpers de marca y secciones full-screen (las @media viven en responsive.css). */
+
+* { box-sizing: border-box; }
+html, body { max-width: 100%; overflow-x: hidden; }
+img { max-width: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--text-body);
+  background: var(--bg-canvas);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--text-strong);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 0.5em;
+  font-weight: var(--fw-bold);
+  text-wrap: balance;
+}
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); }
+
+p { margin: 0 0 1em; text-wrap: pretty; }
+a { color: var(--text-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---- Helpers de marca / tipografía ---- */
+.klg-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--brand-primary);
+}
+.klg-figure {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+.klg-rule {
+  width: 48px; height: 4px; border: 0;
+  background: var(--brand-accent);
+  border-radius: var(--radius-pill);
+  margin: var(--space-4) 0;
+}
+
+/* ---- Full-screen sections (cada scroll cae en una sección completa) ---- */
+.klg-snap { scroll-snap-type: y proximity; scroll-behavior: smooth; }
+.klg-section {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-top: 104px;
+  padding-bottom: 56px;
+  scroll-snap-align: start;
+}
+.klg-section--flush { padding-top: 0; padding-bottom: 0; }
+
+/* ---- Marquee de normas (cinta continua sobre el banner, integrada al header) ---- */
+@keyframes klgMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.klg-marquee { overflow: hidden; white-space: nowrap; }
+.klg-marquee-track { display: inline-flex; align-items: center; animation: klgMarquee 32s linear infinite; }
+.klg-marquee:hover .klg-marquee-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .klg-marquee-track { animation: none; } }

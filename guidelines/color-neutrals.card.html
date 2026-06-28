@@ -1,0 +1,23 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Ink, Neutrals & Hueso" subtitle="Text grays and the off-white canvas" -->
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8" /><link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin:0; padding:20px; background:var(--paper); }
+  .swatches { display:flex; gap:0; border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-sm); border:1px solid var(--border-subtle); }
+  .sw { flex:1; height:88px; display:flex; align-items:flex-end; padding:8px; }
+  .sw span { font-family:var(--font-mono); font-size:10px; }
+  .meta { margin-top:10px; font-family:var(--font-mono); font-size:11px; color:var(--text-muted); }
+</style></head>
+<body>
+<div class="swatches">
+  <div class="sw" style="background:var(--ink-900)"><span style="color:#fff">ink-900</span></div>
+  <div class="sw" style="background:var(--ink-700)"><span style="color:#fff">700</span></div>
+  <div class="sw" style="background:var(--ink-500)"><span style="color:#fff">500</span></div>
+  <div class="sw" style="background:var(--ink-300)"><span style="color:var(--ink-900)">300</span></div>
+  <div class="sw" style="background:var(--ink-100)"><span style="color:var(--ink-900)">100</span></div>
+  <div class="sw" style="background:var(--hueso-deep)"><span style="color:var(--ink-900)">hueso-deep</span></div>
+  <div class="sw" style="background:var(--hueso)"><span style="color:var(--ink-900)">hueso</span></div>
+  <div class="sw" style="background:var(--paper)"><span style="color:var(--ink-900)">paper</span></div>
+</div>
+<div class="meta">--ink-900 #14151B body text&nbsp;·&nbsp;--ink-500 line-art icons&nbsp;·&nbsp;--hueso #F5F3EC base canvas</div>
+</body></html>

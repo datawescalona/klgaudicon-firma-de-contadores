@@ -1,0 +1,6 @@
+/* KLG AUDICON — cards.css
+   Las tarjetas (Card / ServiceCard) se estilizan inline en sus componentes.
+   Aquí vive la utilidad de inclinación firma de marca. */
+
+.klg-tilt { transform: rotate(var(--tilt)); }
+.klg-tilt-alt { transform: rotate(var(--tilt-alt)); }

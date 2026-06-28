@@ -1,0 +1,12 @@
+<!-- @dsCard group="Spacing" viewport="700x180" name="Signature Tilt" subtitle="Subtle 1–2° card rotation breaks the grid" -->
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8" /><link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin:0; padding:30px; background:var(--hueso); display:flex; gap:24px; justify-content:center; align-items:center; }
+  .card { width:150px; height:104px; background:var(--paper); border-radius:var(--radius-lg); box-shadow:var(--shadow-md); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:11px; color:var(--text-muted); border-top:4px solid var(--cyan-500); }
+</style></head>
+<body>
+<div class="card" style="transform:rotate(var(--tilt))">--tilt −1.4°</div>
+<div class="card">0° base</div>
+<div class="card" style="transform:rotate(var(--tilt-alt))">--tilt-alt +1.2°</div>
+</body></html>

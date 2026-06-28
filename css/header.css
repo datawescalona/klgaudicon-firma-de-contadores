@@ -1,0 +1,5 @@
+/* KLG AUDICON — header.css
+   Utilidades del header compartido (components/header.html). Los breakpoints viven en responsive.css. */
+
+.klg-nav-desktop { display: flex; }
+.klg-nav-mobile { display: none; }

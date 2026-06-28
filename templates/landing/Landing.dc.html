@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="KLG Landing" description="Marketing hero + services grid landing page on the KLG AUDICON brand system" -->
+<helmet>
+<script src="./ds-base.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  body { margin: 0; }
+</style>
+</helmet>
+
+<div style="font-family: var(--font-sans); background: var(--hueso); color: var(--text-body); min-height: 100vh;">
+
+  <!-- Floating glass pill nav -->
+  <div style="position: sticky; top: 0; z-index: 50; padding: 18px clamp(1.25rem,5vw,4rem) 0;">
+    <nav style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 24px; padding: 10px 12px 10px 22px; background: var(--glass-bg); -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%); border: 1px solid var(--glass-border); border-radius: var(--radius-pill); box-shadow: var(--shadow-md);">
+      <img src="../../assets/logo-horizontal-cobalt.png" alt="KLG AUDICON" style="height: 24px; display: block;" />
+      <div style="display: flex; gap: 6px; flex-grow: 1; justify-content: center;">
+        <a href="#" style="font-weight: 600; font-size: 0.9375rem; color: var(--brand-primary); background: var(--cobalt-050); padding: 8px 16px; border-radius: var(--radius-pill); text-decoration: none;">Inicio</a>
+        <a href="#" style="font-weight: 600; font-size: 0.9375rem; color: var(--text-body); padding: 8px 16px; border-radius: var(--radius-pill); text-decoration: none;">Servicios</a>
+        <a href="#" style="font-weight: 600; font-size: 0.9375rem; color: var(--text-body); padding: 8px 16px; border-radius: var(--radius-pill); text-decoration: none;">Blog</a>
+        <a href="#" style="font-weight: 600; font-size: 0.9375rem; color: var(--text-body); padding: 8px 16px; border-radius: var(--radius-pill); text-decoration: none;">Contacto</a>
+      </div>
+      <x-import component-from-global-scope="DesignSystem_b17006.Button" variant="cta" size="sm" hint-size="120px,40px">Hablemos</x-import>
+    </nav>
+  </div>
+
+  <!-- Hero — dark, serious, Caracas backdrop -->
+  <section style="position: relative; overflow: hidden; background: var(--navy-950); margin-top: -88px; padding-top: 88px;">
+    <div style="position: absolute; inset: 0; z-index: 0;">
+      <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000&auto=format&fit=crop" alt="Centro empresarial" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.5;" />
+      <div style="position: absolute; inset: 0; background: linear-gradient(100deg, var(--navy-950) 26%, rgba(12,18,48,0.82) 54%, rgba(7,10,24,0.4) 100%);"></div>
+      <div style="position: absolute; inset: 0; background: linear-gradient(0deg, var(--navy-950) 1%, transparent 30%);"></div>
+    </div>
+    <div style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 92px clamp(1.25rem,5vw,4rem) 100px;">
+      <div style="max-width: 780px;">
+        <div style="display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px; border-radius: var(--radius-pill); border: 1px solid rgba(194,162,99,0.45); background: rgba(168,132,74,0.12); margin-bottom: 26px;">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--gold-500);"></span>
+          <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-300);">Firma de Auditores Financieros · Caracas, Venezuela</span>
+        </div>
+        <h1 style="font-family: var(--font-display); font-weight: 700; font-size: clamp(2.7rem,5.2vw,4.5rem); line-height: 1.05; letter-spacing: -0.025em; color: #fff; margin: 0;">Tu empresa no necesita más contadores. Necesita <span style="color: var(--gold-500);">blindaje fiscal.</span></h1>
+        <p style="font-size: 1.25rem; line-height: 1.6; color: rgba(255,255,255,0.76); max-width: 580px; margin-top: 24px;">En KLG AUDICON auditamos, ordenamos y protegemos las finanzas de tu empresa. Cumplimiento ante el SENIAT, outsourcing contable de precisión y auditorías que detectan lo que otros no ven.</p>
+        <div style="display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap;">
+          <x-import component-from-global-scope="DesignSystem_b17006.Button" variant="cta" size="lg" hint-size="220px,54px">Habla con un experto</x-import>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section style="max-width: 1200px; margin: 0 auto; padding: 72px clamp(1.25rem,5vw,4rem) 0;">
+    <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--brand-primary);">Áreas de práctica</span>
+    <h2 style="font-family: var(--font-display); font-weight: 700; font-size: clamp(1.75rem,3vw,2.4rem); letter-spacing: -0.02em; color: var(--text-strong); margin: 10px 0 28px;">Lo que hacemos para proteger tu empresa</h2>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+      <x-import component-from-global-scope="DesignSystem_b17006.ServiceCard" title="Auditorías financieras" tone="cobalt" cta="Ver servicio" hint-size="100%,260px">Verificamos que tus estados financieros sean reales y emitimos una opinión profesional independiente.</x-import>
+      <x-import component-from-global-scope="DesignSystem_b17006.ServiceCard" title="Cumplimiento tributario" tone="cobalt" cta="Ver servicio" hint-size="100%,260px">IVA, ISLR, IGTF e IGP declarados correctamente y en plazo. Cero multas del SENIAT.</x-import>
+      <x-import component-from-global-scope="DesignSystem_b17006.ServiceCard" title="Conciliación express" tone="bronze" cta="Quiero esto" hint-size="100%,260px">Reporte de diferencias entre tus libros y los estados de cuenta bancarios en 24 horas.</x-import>
+    </div>
+  </section>
+
+  <!-- Lead magnet band -->
+  <section style="max-width: 1200px; margin: 88px auto 96px; padding: 0 clamp(1.25rem,5vw,4rem);">
+    <div style="background: var(--navy-950); border-top: 3px solid var(--gold-600); border-radius: var(--radius-lg); padding: 56px; color: #fff; display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center;">
+      <div>
+        <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-300);">Recurso descargable</span>
+        <h2 style="font-family: var(--font-display); font-weight: 700; font-size: clamp(1.75rem,3vw,2.4rem); letter-spacing: -0.02em; color: #fff; margin: 12px 0 8px;">¿Sabes qué errores contables sanciona el SENIAT?</h2>
+        <p style="color: rgba(255,255,255,0.72); max-width: 460px; margin: 0;">Descarga gratis el checklist con los 10 errores más comunes que detectan los fiscalizadores.</p>
+      </div>
+      <x-import component-from-global-scope="DesignSystem_b17006.Button" variant="cta" size="lg" fullWidth="true" hint-size="100%,54px">Descargar checklist — PDF</x-import>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+</body>
+</html>

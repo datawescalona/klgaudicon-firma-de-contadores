@@ -1,0 +1,4 @@
+/* KLG AUDICON — forms.css
+   Los campos de formulario (Input / Select / Textarea) se estilizan inline en el componente Input
+   usando los tokens de variables.css (--border-default, --focus-ring, --radius-md, etc.).
+   Reservado para overrides globales de formularios; sin reglas propias por ahora. */

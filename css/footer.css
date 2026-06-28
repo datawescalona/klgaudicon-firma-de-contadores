@@ -1,0 +1,6 @@
+/* KLG AUDICON — footer.css
+   Utilidades del footer compartido (components/footer.html).
+   El footer se estiliza con estilos inline; aquí van solo los helpers compartidos que usa su barra inferior.
+   Los breakpoints (apilado de columnas) viven en responsive.css. */
+
+.klg-wrap-row { display: flex; }

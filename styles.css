@@ -1,0 +1,12 @@
+/* KLG AUDICON — Design System entry point
+   Consumers link this single file. @import lines only.
+   CSS organizado en css/ (Etapa 3): variables → layout → componentes → responsive. */
+@import url('tokens/fonts.css');
+@import url('css/variables.css');
+@import url('css/layout.css');
+@import url('css/header.css');
+@import url('css/footer.css');
+@import url('css/buttons.css');
+@import url('css/forms.css');
+@import url('css/cards.css');
+@import url('css/responsive.css');
