@@ -25,7 +25,9 @@
   .klg-split,
   .klg-2col,
   .klg-3col,
-  .klg-4col { grid-template-columns: 1fr !important; }
+  .klg-4col,
+  .klg-problem-grid { grid-template-columns: 1fr !important; }
+  .klg-credits-mask { height: auto !important; max-height: 360px !important; }
 
   /* Footer nav: logo y contacto full; Servicios + La Firma lado a lado */
   .klg-foot-nav { grid-template-columns: 1fr 1fr !important; gap: 22px var(--space-6) !important; padding-top: var(--space-8) !important; padding-bottom: var(--space-6) !important; }
