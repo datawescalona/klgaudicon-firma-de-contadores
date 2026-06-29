@@ -140,7 +140,33 @@ function ServicesGrid({ go }) {
 // ---- Sección "El Problema": cards oscuras premium, compactas y responsivas ----
 function ProblemSection() {
   const ref = React.useRef(null);
+  const trackRef = React.useRef(null);
   const [p, setP] = React.useState(0);
+  // Marquee vertical autónomo (no depende de CSS externo)
+  React.useEffect(() => {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const track = trackRef.current;
+    if (!track) return;
+    let y = 0, last = 0, raf = 0, paused = false;
+    const speed = 38; // px por segundo
+    const onEnter = () => { paused = true; };
+    const onLeave = () => { paused = false; };
+    track.parentNode.addEventListener('mouseenter', onEnter);
+    track.parentNode.addEventListener('mouseleave', onLeave);
+    const step = (t) => {
+      if (!last) last = t;
+      const dt = (t - last) / 1000; last = t;
+      if (!paused) {
+        y -= speed * dt;
+        const half = track.scrollHeight / 2;
+        if (half > 0 && -y >= half) y += half;
+        track.style.transform = 'translateY(' + y + 'px)';
+      }
+      raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => { cancelAnimationFrame(raf); track.parentNode.removeEventListener('mouseenter', onEnter); track.parentNode.removeEventListener('mouseleave', onLeave); };
+  }, []);
   React.useEffect(() => {
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setP(1); return; }
     const el = ref.current;
@@ -183,7 +209,7 @@ function ProblemSection() {
         </div>
         {/* Bloque derecho: créditos verticales en bucle */}
         <div className="klg-credits-mask" style={{ position: 'relative', height: 'clamp(300px, 42vh, 380px)', overflow: 'hidden', WebkitMaskImage: 'linear-gradient(180deg, transparent, #000 16%, #000 84%, transparent)', maskImage: 'linear-gradient(180deg, transparent, #000 16%, #000 84%, transparent)' }}>
-          <div className="klg-credits-track" style={{ display: 'flex', flexDirection: 'column' }}>
+          <div ref={trackRef} className="klg-credits-track" style={{ display: 'flex', flexDirection: 'column', willChange: 'transform' }}>
             {seq.map((pain, i) => (
               <ProblemItem key={i} pain={pain} idx={i % pains.length} />
             ))}
