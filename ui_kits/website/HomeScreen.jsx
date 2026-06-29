@@ -137,6 +137,80 @@ function ServicesGrid({ go }) {
   );
 }
 
+// ---- Sección "El Problema": cards oscuras premium, compactas y responsivas ----
+function ProblemSection() {
+  const ref = React.useRef(null);
+  const [p, setP] = React.useState(0);
+  React.useEffect(() => {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setP(1); return; }
+    const el = ref.current;
+    if (!el) return;
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const r = el.getBoundingClientRect();
+        const vh = window.innerHeight || 800;
+        setP(Math.max(0, Math.min(1, (vh - r.top) / (vh * 0.65))));
+      });
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); if (raf) cancelAnimationFrame(raf); };
+  }, []);
+  const pains = [
+    { ic: 'triangle-alert', t: 'Riesgo fiscal ante el SENIAT', q: 'Declaro IVA, ISLR y retenciones pero no tengo certeza de que estén correctas. Un error puede costarme una multa.' },
+    { ic: 'clock', t: 'Contabilidad sin control', q: 'Mi contabilidad va atrasada, los estados financieros no están al día y no puedo tomar decisiones con datos reales.' },
+    { ic: 'shield', t: 'Sin auditoría que me respalde', q: 'Nunca he tenido una auditoría formal. Si el SENIAT fiscaliza, no tengo cómo demostrar que todo está en orden.' },
+  ];
+  const seq = [...pains, ...pains]; // duplicado para bucle continuo
+  return (
+    <section ref={ref} data-nav-theme="dark" style={{ background: 'var(--navy-950)', position: 'relative', overflow: 'hidden', padding: 'clamp(3.5rem, 8vw, 6rem) 0', borderTop: '1px solid rgba(194,162,99,0.18)' }}>
+      <div aria-hidden style={{ position: 'absolute', top: '-25%', right: '-8%', width: 460, height: 460, borderRadius: '50%', background: 'radial-gradient(circle, rgba(168,132,74,0.16), transparent 70%)', pointerEvents: 'none', transform: `translateY(${(p - 0.5) * 90}px)`, willChange: 'transform' }}></div>
+      <div className="klg-pad klg-problem-grid" style={{ maxWidth: 'var(--container)', margin: '0 auto', padding: '0 var(--gutter)', position: 'relative', boxSizing: 'border-box', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(2rem, 5vw, 4.5rem)', alignItems: 'center' }}>
+        {/* Bloque izquierdo: H2 + intro */}
+        <div style={{ transform: `translateX(${(1 - Math.min(1, p * 1.6)) * -36}px)`, opacity: Math.min(1, 0.3 + p * 1.6) }}>
+          <span className="klg-eyebrow" style={{ color: 'var(--gold-300)' }}>El problema</span>
+          <h2 style={{ marginTop: 14, color: '#fff', fontSize: 'clamp(1.9rem, 3.8vw, 3rem)' }}>¿Tu empresa opera con alguna de estas incertidumbres?</h2>
+          <p style={{ color: 'rgba(255,255,255,0.66)', marginTop: 16, fontSize: 'var(--fs-lead)', lineHeight: 1.6, maxWidth: 480 }}>
+            El entorno fiscal venezolano no perdona errores. Declaraciones incorrectas ante el SENIAT, contabilidad atrasada o estados financieros sin dictamen pueden derivar en multas y sanciones.
+          </p>
+          <p style={{ marginTop: 24, fontSize: '1.15rem', lineHeight: 1.5, color: '#fff', fontFamily: 'var(--font-display)', fontWeight: 600, letterSpacing: '-0.01em' }}>
+            Si algo de esto te resulta familiar, <span style={{ color: 'var(--gold-300)' }}>KLG AUDICON existe exactamente para resolverlo.</span>
+          </p>
+        </div>
+        {/* Bloque derecho: créditos verticales en bucle */}
+        <div className="klg-credits-mask" style={{ position: 'relative', height: 'clamp(300px, 42vh, 380px)', overflow: 'hidden', WebkitMaskImage: 'linear-gradient(180deg, transparent, #000 16%, #000 84%, transparent)', maskImage: 'linear-gradient(180deg, transparent, #000 16%, #000 84%, transparent)' }}>
+          <div className="klg-credits-track" style={{ display: 'flex', flexDirection: 'column' }}>
+            {seq.map((pain, i) => (
+              <ProblemItem key={i} pain={pain} idx={i % pains.length} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProblemItem({ pain, idx }) {
+  const [hov, setHov] = React.useState(false);
+  return (
+    <div
+      onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
+      style={{ display: 'flex', gap: 18, alignItems: 'flex-start', padding: 'clamp(18px, 2.4vw, 26px) 4px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+      <span style={{ width: 46, height: 46, flexShrink: 0, borderRadius: 12, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: 'var(--gold-300)', background: 'rgba(168,132,74,0.16)', transition: 'transform 320ms var(--ease-out)', transform: hov ? 'scale(1.08)' : 'scale(1)' }}><Icon n={pain.ic} s={22} /></span>
+      <div>
+        <h3 style={{ margin: 0, color: hov ? 'var(--gold-300)' : '#fff', fontSize: 'clamp(1.15rem, 2.2vw, 1.5rem)', letterSpacing: '-0.01em', transition: 'color 240ms' }}>{pain.t}</h3>
+        <p style={{ margin: '8px 0 0', fontSize: 'clamp(0.95rem, 1.4vw, 1.05rem)', lineHeight: 1.5, color: 'rgba(255,255,255,0.7)' }}>
+          <span style={{ color: 'var(--gold-500)', fontFamily: 'Georgia, serif', fontSize: '1.4em', lineHeight: 0, verticalAlign: '-0.3em', marginRight: 4 }}>“</span>{pain.q}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 // ---- Zona de confianza: distinct reveal — cards flip up + clip-reveal, staggered ----
 function SectorsBand() {
   const ref = React.useRef(null);
@@ -296,6 +370,7 @@ function HomeScreen({ go }) {
     <div>
       <Hero go={go} />
       <ServicesGrid go={go} />
+      <ProblemSection />
       <SectorsBand />
       <Reasons />
       <CredencialesBand />
