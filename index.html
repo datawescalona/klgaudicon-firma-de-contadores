@@ -315,6 +315,13 @@ a:hover { text-decoration: underline; }
 }
 .klg-badge-tone { animation: klgBadgeGlowTone 3.6s ease-in-out infinite; }
 
+/* Botón CTA: sombra que titila tenue y lento */
+@keyframes klgBtnGlow {
+  0%, 100% { box-shadow: 0 4px 14px rgba(15,23,42,0.10); }
+  50%      { box-shadow: 0 10px 30px rgba(15,23,42,0.26); }
+}
+.klg-btn-glow { animation: klgBtnGlow 3.2s ease-in-out infinite; border: none !important; }
+
 /* ServiceCard: borde dorado al pasar el mouse (override del borde inline) */
 .klg-service-card { transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), border-color 220ms var(--ease-out) !important; }
 .klg-service-card:hover {
@@ -352,6 +359,14 @@ a:hover { text-decoration: underline; }
   .klg-3col { grid-template-columns: repeat(2, 1fr) !important; }
   .klg-4col { grid-template-columns: repeat(2, 1fr) !important; }
   .klg-sectors-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .klg-proceso-grid { grid-template-columns: 1fr !important; row-gap: var(--space-7) !important; }
+  .klg-proceso-wrap { margin-top: var(--space-6) !important; }
+  .klg-proceso-hline { display: none !important; }
+  .klg-proceso-step { flex-direction: row !important; align-items: flex-start !important; text-align: left !important; gap: 18px !important; }
+  .klg-proceso-titlerow { min-height: 0 !important; align-items: center !important; justify-content: flex-start !important; }
+  .klg-proceso-text { padding-top: 4px !important; }
+  .klg-conn-h { display: none !important; }
+  .klg-conn-v { display: block !important; }
   .klg-franja { grid-template-columns: repeat(2, 1fr) !important; row-gap: 14px !important; }
 }
 
@@ -3978,27 +3993,69 @@ function LeadMagnet({ go }) {
   );
 }
 
-function CredencialesBand() {
-  const cred = [
-    ['shield-check', 'Certificación SUDEBAN', 'Habilitados para prestar servicios a entidades bajo supervisión de la Superintendencia de las Instituciones del Sector Bancario de Venezuela.'],
-    ['badge-check', 'Colegiados CCPV', 'Miembros activos del Colegio de Contadores Públicos de Venezuela con inscripción y colegiatura vigente.'],
-    ['graduation-cap', '+20 años de experiencia', 'Socios directivos egresados de la Universidad Central de Venezuela (UCV) con especialización en múltiples sectores productivos.'],
+function ProcesoBand({ go }) {
+  const ref = React.useRef(null);
+  const [shown, setShown] = React.useState(false);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setShown(true); return; }
+    const obs = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { setShown(true); obs.disconnect(); } }), { threshold: 0.18 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  const steps = [
+    { n: '01', ic: 'search', t: 'Diagnóstico inicial sin costo', d: 'Entendemos tu empresa, tu sector, el período que necesitas cubrir y cuál es el riesgo o urgencia principal.' },
+    { n: '02', ic: 'file-text', t: 'Propuesta personalizada', d: 'Definimos el alcance exacto del servicio, los entregables, el plazo de ejecución y el presupuesto. Sin letra pequeña.' },
+    { n: '03', ic: 'cpu', t: 'Ejecución con tecnología', d: 'Ejecutamos el trabajo con software especializado, procesos sistematizados y comunicación constante con tu equipo.' },
+    { n: '04', ic: 'clipboard-check', t: 'Entrega y seguimiento', d: 'Entregamos informe o dictamen con hallazgos y recomendaciones accionables, y damos seguimiento a su implementación.' },
   ];
   return (
-    <section className="klg-section" style={{ background: 'var(--bg-sunken)' }}>
+    <section ref={ref} className="klg-section" style={{ background: 'var(--bg-sunken)' }}>
       <div className="klg-pad" style={{ maxWidth: 'var(--container)', margin: '0 auto', padding: '0 var(--gutter)', width: '100%', boxSizing: 'border-box' }}>
-        <div style={{ textAlign: 'center', marginBottom: 'var(--space-8)' }}>
-          <span className="klg-eyebrow">Respaldo institucional</span>
-          <h2 style={{ marginTop: 10 }}>Credenciales que dan certeza</h2>
+        <div style={{ maxWidth: 720, marginBottom: 'var(--space-7)', opacity: shown ? 1 : 0, transform: shown ? 'none' : 'translateY(16px)', transition: 'opacity 600ms var(--ease-out), transform 700ms var(--ease-out)' }}>
+          <span className="klg-eyebrow">Cómo trabajamos</span>
+          <h2 style={{ marginTop: 12, marginBottom: 10 }}>Así trabajamos con tu empresa</h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: 16, lineHeight: 1.6, margin: 0 }}>Un proceso claro desde el primer contacto hasta la entrega. Sin sorpresas, sin demoras.</p>
         </div>
-        <div className="klg-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-5)' }}>
-          {cred.map(([ic, t, d]) => (
-            <div key={t} style={{ display: 'flex', flexDirection: 'column', gap: 14, padding: 'var(--space-6)', borderRadius: 'var(--radius-lg)', background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-sm)' }}>
-              <span style={{ width: 52, height: 52, borderRadius: 'var(--radius-md)', background: 'var(--cobalt-050)', color: 'var(--cobalt-700)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}><Icon n={ic} s={26} /></span>
-              <h3 style={{ margin: 0, fontSize: '1.25rem' }}>{t}</h3>
-              <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: 'var(--text-muted)' }}>{d}</p>
-            </div>
-          ))}
+
+        <div className="klg-proceso-wrap" style={{ position: 'relative' }}>
+          <div className="klg-proceso-hline" aria-hidden style={{ position: 'absolute', top: 27, left: '12.5%', right: '12.5%', height: 2, background: 'var(--border-default)', overflow: 'hidden', zIndex: 0 }}>
+            <div style={{ position: 'absolute', inset: 0, background: 'var(--cobalt-600)', transformOrigin: 'left center', transform: shown ? 'scaleX(1)' : 'scaleX(0)', transition: 'transform 1200ms var(--ease-out) 300ms' }}></div>
+          </div>
+
+          <div className="klg-proceso-grid" style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--space-6)' }}>
+            {steps.map((s, i) => (
+              <div key={s.n} className="klg-proceso-step" style={{
+                position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 18,
+                opacity: shown ? 1 : 0,
+                transform: shown ? 'none' : 'translateY(18px)',
+                transition: `opacity 520ms var(--ease-out) ${260 + i * 130}ms, transform 600ms var(--ease-out) ${260 + i * 130}ms`,
+              }}>
+                {i < steps.length - 1 && (
+                  <span className="klg-conn-v" aria-hidden style={{ display: 'none', position: 'absolute', top: 60, bottom: 'calc(-1 * var(--space-6))', left: 26, width: 2, background: 'var(--border-default)', overflow: 'hidden', zIndex: 0 }}>
+                    <span style={{ position: 'absolute', inset: 0, background: 'var(--cobalt-600)', transformOrigin: 'top center', transform: shown ? 'scaleY(1)' : 'scaleY(0)', transition: `transform 600ms var(--ease-out) ${360 + i * 160}ms` }}></span>
+                  </span>
+                )}
+
+                <div className="klg-proceso-num" style={{ flexShrink: 0 }}>
+                  <span style={{ position: 'relative', width: 54, height: 54, borderRadius: '50%', background: 'var(--bg-surface)', border: '2px solid var(--cobalt-600)', color: 'var(--cobalt-700)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 18, letterSpacing: '-0.01em', boxShadow: '0 0 0 6px var(--bg-sunken)', zIndex: 1 }}>{s.n}</span>
+                </div>
+
+                <div className="klg-proceso-text">
+                  <div className="klg-proceso-titlerow" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center', gap: 9, marginBottom: 10, minHeight: 'calc(2 * 1.12rem * 1.25)' }}>
+                    <span style={{ color: 'var(--gold-600)', display: 'inline-flex', flexShrink: 0, marginTop: 2 }}><Icon n={s.ic} s={18} /></span>
+                    <h3 style={{ margin: 0, fontSize: '1.12rem', letterSpacing: '-0.01em', lineHeight: 1.25 }}>{s.t}</h3>
+                  </div>
+                  <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6, color: 'var(--text-muted)' }}>{s.d}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ marginTop: 'var(--space-8)', display: 'flex', justifyContent: 'center', opacity: shown ? 1 : 0, transform: shown ? 'none' : 'translateY(12px)', transition: 'opacity 520ms var(--ease-out) 900ms, transform 600ms var(--ease-out) 900ms' }}>
+          <Button variant="cta" size="lg" className="klg-btn-glow" style={{ border: 'none' }} onClick={() => go('contacto')}>Iniciar con un diagnóstico gratuito</Button>
         </div>
       </div>
     </section>
@@ -4126,7 +4183,7 @@ function HomeScreen({ go }) {
       <ProblemSection />
       <Pillars />
       <SectorsBand />
-      <CredencialesBand />
+      <ProcesoBand go={go} />
       <CTABand go={go} />
       <LeadMagnet go={go} />
     </div>
