@@ -270,6 +270,16 @@ a:hover { text-decoration: underline; }
 }
 .klg-section--flush { padding-top: 0; padding-bottom: 0; }
 
+/* Ritmo vertical uniforme para secciones de contenido del body (no banner/footer) */
+.klg-sect-std {
+  min-height: 0 !important;
+  justify-content: flex-start !important;
+  padding-top: clamp(60px, 7vh, 92px) !important;
+  padding-bottom: clamp(60px, 7vh, 92px) !important;
+}
+/* Última sección de contenido pega con el footer: un solo padding moderado */
+.klg-sect-last { padding-bottom: clamp(36px, 4vh, 56px) !important; }
+
 /* ---- Marquee de normas (cinta continua sobre el banner, integrada al header) ---- */
 @keyframes klgMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .klg-marquee { overflow: hidden; white-space: nowrap; }
@@ -3670,7 +3680,7 @@ function Reveal({ children, index = 0, y = 28, className, style }) {
 
 function ServicesGrid({ go }) {
   return (
-    <section id="servicios-home" className="klg-section" style={{ background: 'var(--bg-canvas)' }}>
+    <section id="servicios-home" className="klg-section klg-sect-std" style={{ background: 'var(--bg-canvas)' }}>
       <div className="klg-pad" style={{ maxWidth: 'var(--container)', margin: '0 auto', padding: '0 var(--gutter)', width: '100%', boxSizing: 'border-box' }}>
         <Reveal index={0} style={{ maxWidth: 720, marginBottom: 'var(--space-6)' }}>
           <span className="klg-eyebrow">Áreas de práctica</span>
@@ -3708,27 +3718,8 @@ function SectorsBand() {
     return () => obs.disconnect();
   }, []);
   return (
-    <section ref={ref} className="klg-section" style={{ background: 'var(--hueso)', position: 'relative', overflow: 'hidden', borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)' }}>
+    <section ref={ref} className="klg-section klg-sect-std klg-sect-last" style={{ background: 'var(--bg-canvas)', position: 'relative', overflow: 'hidden' }}>
       <div className="klg-pad" style={{ maxWidth: 'var(--container)', margin: '0 auto', padding: '0 var(--gutter)', width: '100%', boxSizing: 'border-box' }}>
-        {/* Innovación Tecnológica feature row */}
-        <div className="klg-wrap-row" style={{
-          display: 'flex', alignItems: 'center', gap: 20, padding: '20px 26px', marginBottom: 'var(--space-6)',
-          background: 'var(--navy-950)', borderRadius: 'var(--radius-md)', borderLeft: '4px solid var(--gold-600)',
-          opacity: shown ? 1 : 0, transform: shown ? 'none' : 'translateY(16px)',
-          transition: 'opacity 600ms var(--ease-out), transform 600ms var(--ease-out)',
-        }}>
-          <span style={{ width: 54, height: 54, flexShrink: 0, borderRadius: 'var(--radius-sm)', background: 'rgba(168,132,74,0.16)', color: 'var(--gold-500)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}><Icon n="cpu" s={28} /></span>
-          <div style={{ flexGrow: 1 }}>
-            <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 19, color: '#fff' }}>Innovación Tecnológica</div>
-            <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: 14.5, marginTop: 2 }}>Automatizamos la contabilidad con herramientas digitales: reportes en tiempo real, conciliaciones asistidas y trazabilidad total de cada cifra.</div>
-          </div>
-          <span style={{ display: 'flex', gap: 6, flexShrink: 0, flexWrap: 'wrap' }}>
-            {['cloud', 'shield-check', 'line-chart'].map((n) => (
-              <span key={n} style={{ width: 38, height: 38, borderRadius: 8, background: 'rgba(255,255,255,0.06)', color: 'var(--gold-300)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}><Icon n={n} s={18} /></span>
-            ))}
-          </span>
-        </div>
-
         <div style={{ maxWidth: 760, marginBottom: 'var(--space-5)', opacity: shown ? 1 : 0, transform: shown ? 'none' : 'translateY(16px)', transition: 'opacity 600ms var(--ease-out), transform 700ms var(--ease-out)' }}>
           <span className="klg-eyebrow">Zona de confianza</span>
           <h2 style={{ marginTop: 12, marginBottom: 10 }}>Experiencia en los sectores que mueven Venezuela</h2>
@@ -4011,7 +4002,7 @@ function ProcesoBand({ go }) {
     { n: '04', ic: 'clipboard-check', t: 'Entrega y seguimiento', d: 'Entregamos informe o dictamen con hallazgos y recomendaciones accionables, y damos seguimiento a su implementación.' },
   ];
   return (
-    <section ref={ref} className="klg-section" style={{ background: 'var(--bg-sunken)' }}>
+    <section ref={ref} className="klg-section klg-sect-std" style={{ background: 'var(--bg-sunken)' }}>
       <div className="klg-pad" style={{ maxWidth: 'var(--container)', margin: '0 auto', padding: '0 var(--gutter)', width: '100%', boxSizing: 'border-box' }}>
         <div style={{ maxWidth: 720, marginBottom: 'var(--space-8)', opacity: shown ? 1 : 0, transform: shown ? 'none' : 'translateY(16px)', transition: 'opacity 600ms var(--ease-out), transform 700ms var(--ease-out)' }}>
           <span className="klg-eyebrow">Cómo trabajamos</span>
@@ -4054,9 +4045,6 @@ function ProcesoBand({ go }) {
           </div>
         </div>
 
-        <div style={{ marginTop: 'var(--space-9, 96px)', display: 'flex', justifyContent: 'center', opacity: shown ? 1 : 0, transform: shown ? 'none' : 'translateY(12px)', transition: 'opacity 520ms var(--ease-out) 900ms, transform 600ms var(--ease-out) 900ms' }}>
-          <Button variant="cta" size="lg" className="klg-btn-glow" style={{ border: 'none' }} onClick={() => go('contacto')}>Iniciar con un diagnóstico gratuito</Button>
-        </div>
       </div>
     </section>
   );
@@ -4075,7 +4063,7 @@ function CTAFinal({ go }) {
   }, []);
   const wa = 'https://wa.me/584121234567?text=' + encodeURIComponent('Hola KLG AUDICON, quiero una consulta inicial.');
   return (
-    <section ref={ref} className="klg-section" style={{ background: 'var(--navy-950)' }} data-nav-theme="dark">
+    <section ref={ref} className="klg-section klg-sect-std" style={{ background: 'var(--navy-950)' }} data-nav-theme="dark">
       <div className="klg-pad" style={{ maxWidth: 'var(--container)', margin: '0 auto', padding: '0 var(--gutter)', width: '100%', boxSizing: 'border-box' }}>
         <div style={{ maxWidth: 760, margin: '0 auto', textAlign: 'center', opacity: shown ? 1 : 0, transform: shown ? 'none' : 'translateY(20px)', transition: 'opacity 650ms var(--ease-out), transform 750ms var(--ease-out)' }}>
           <span className="klg-eyebrow" style={{ color: 'var(--gold-500, #c2a263)' }}>Hablemos</span>
@@ -4223,11 +4211,9 @@ function HomeScreen({ go }) {
       <ServicesGrid go={go} />
       <ProblemSection />
       <Pillars />
-      <SectorsBand />
       <ProcesoBand go={go} />
       <CTAFinal go={go} />
-      <CTABand go={go} />
-      <LeadMagnet go={go} />
+      <SectorsBand />
     </div>
   );
 }
