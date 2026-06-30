@@ -4013,7 +4013,7 @@ function ProcesoBand({ go }) {
   return (
     <section ref={ref} className="klg-section" style={{ background: 'var(--bg-sunken)' }}>
       <div className="klg-pad" style={{ maxWidth: 'var(--container)', margin: '0 auto', padding: '0 var(--gutter)', width: '100%', boxSizing: 'border-box' }}>
-        <div style={{ maxWidth: 720, marginBottom: 'var(--space-7)', opacity: shown ? 1 : 0, transform: shown ? 'none' : 'translateY(16px)', transition: 'opacity 600ms var(--ease-out), transform 700ms var(--ease-out)' }}>
+        <div style={{ maxWidth: 720, marginBottom: 'var(--space-8)', opacity: shown ? 1 : 0, transform: shown ? 'none' : 'translateY(16px)', transition: 'opacity 600ms var(--ease-out), transform 700ms var(--ease-out)' }}>
           <span className="klg-eyebrow">Cómo trabajamos</span>
           <h2 style={{ marginTop: 12, marginBottom: 10 }}>Así trabajamos con tu empresa</h2>
           <p style={{ color: 'var(--text-muted)', fontSize: 16, lineHeight: 1.6, margin: 0 }}>Un proceso claro desde el primer contacto hasta la entrega. Sin sorpresas, sin demoras.</p>
@@ -4054,8 +4054,49 @@ function ProcesoBand({ go }) {
           </div>
         </div>
 
-        <div style={{ marginTop: 'var(--space-8)', display: 'flex', justifyContent: 'center', opacity: shown ? 1 : 0, transform: shown ? 'none' : 'translateY(12px)', transition: 'opacity 520ms var(--ease-out) 900ms, transform 600ms var(--ease-out) 900ms' }}>
+        <div style={{ marginTop: 'var(--space-9, 96px)', display: 'flex', justifyContent: 'center', opacity: shown ? 1 : 0, transform: shown ? 'none' : 'translateY(12px)', transition: 'opacity 520ms var(--ease-out) 900ms, transform 600ms var(--ease-out) 900ms' }}>
           <Button variant="cta" size="lg" className="klg-btn-glow" style={{ border: 'none' }} onClick={() => go('contacto')}>Iniciar con un diagnóstico gratuito</Button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CTAFinal({ go }) {
+  const ref = React.useRef(null);
+  const [shown, setShown] = React.useState(false);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setShown(true); return; }
+    const obs = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { setShown(true); obs.disconnect(); } }), { threshold: 0.2 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  const wa = 'https://wa.me/584121234567?text=' + encodeURIComponent('Hola KLG AUDICON, quiero una consulta inicial.');
+  return (
+    <section ref={ref} className="klg-section" style={{ background: 'var(--navy-950)' }} data-nav-theme="dark">
+      <div className="klg-pad" style={{ maxWidth: 'var(--container)', margin: '0 auto', padding: '0 var(--gutter)', width: '100%', boxSizing: 'border-box' }}>
+        <div style={{ maxWidth: 760, margin: '0 auto', textAlign: 'center', opacity: shown ? 1 : 0, transform: shown ? 'none' : 'translateY(20px)', transition: 'opacity 650ms var(--ease-out), transform 750ms var(--ease-out)' }}>
+          <span className="klg-eyebrow" style={{ color: 'var(--gold-500, #c2a263)' }}>Hablemos</span>
+          <h2 style={{ color: '#fff', fontSize: 'clamp(1.9rem, 4.4vw, 3rem)', letterSpacing: '-0.02em', margin: '12px 0 14px' }}>¿Listo para proteger las finanzas de tu empresa?</h2>
+          <p style={{ color: 'rgba(255,255,255,0.74)', fontSize: 'var(--fs-lead)', lineHeight: 1.6, maxWidth: 600, margin: '0 auto' }}>Cuéntanos tu situación. Sin compromiso. Sin costo por la consulta inicial. Respondemos en menos de 24 horas.</p>
+
+          <div className="klg-ctafinal-btns" style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', marginTop: 32 }}>
+            <a href={wa} target="_blank" rel="noopener noreferrer" className="klg-btn-glow" style={{ display: 'inline-flex', alignItems: 'center', gap: 11, background: 'var(--whatsapp)', color: '#fff', textDecoration: 'none', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 16.5, padding: '16px 30px', borderRadius: 'var(--radius-pill)', border: 'none' }}>
+              <Icon n="message-circle" s={20} /> Escribir por WhatsApp
+            </a>
+            <button onClick={() => go('contacto')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: 'transparent', color: '#fff', cursor: 'pointer', fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 16.5, padding: '16px 30px', borderRadius: 'var(--radius-pill)', border: '1.5px solid rgba(255,255,255,0.45)', transition: 'border-color 200ms, background 200ms' }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--gold-500, #c2a263)'; e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.45)'; e.currentTarget.style.background = 'transparent'; }}>
+              Enviar consulta por formulario
+            </button>
+          </div>
+
+          <p style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'rgba(255,255,255,0.5)', fontSize: 13.5, lineHeight: 1.55, maxWidth: 520, margin: '26px auto 0' }}>
+            <span style={{ color: 'var(--gold-500, #c2a263)', display: 'inline-flex', flexShrink: 0 }}><Icon n="lock" s={15} /></span>
+            Tu información es confidencial. No compartimos datos de nuestros clientes con terceros bajo ninguna circunstancia.
+          </p>
         </div>
       </div>
     </section>
@@ -4184,6 +4225,7 @@ function HomeScreen({ go }) {
       <Pillars />
       <SectorsBand />
       <ProcesoBand go={go} />
+      <CTAFinal go={go} />
       <CTABand go={go} />
       <LeadMagnet go={go} />
     </div>
