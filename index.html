@@ -425,6 +425,11 @@ a:hover { text-decoration: underline; }
   .klg-snap { scroll-snap-type: none; }
 }
 
+/* Hero — PC y tablet: centra verticalmente el bloque de texto (h1 a botón) dentro del banner, sin agregar altura extra (el banner sigue cabiendo en la primera pantalla, sin scroll, y la franja de confianza no se mueve). Móvil sin cambios. */
+@media (min-width: 761px) {
+  .klg-hero-content { align-items: center !important; padding-top: 48px !important; padding-bottom: 48px !important; }
+}
+
 /* Viewports cortos: deja respirar el contenido en vez de recortar */
 @media (max-height: 720px) {
   .klg-section:not(.klg-section--flush) { min-height: 0; padding-top: 120px; padding-bottom: 64px; }
@@ -3621,7 +3626,7 @@ function Hero({ go }) {
         <BinaryRain />
       </div>
 
-      <div style={{ position: 'relative', zIndex: 2, flexGrow: 1, display: 'flex', alignItems: 'flex-start', paddingTop: 180, paddingBottom: 30 }}>
+      <div className="klg-hero-content" style={{ position: 'relative', zIndex: 2, flexGrow: 1, display: 'flex', alignItems: 'flex-start', paddingTop: 180, paddingBottom: 30 }}>
         <div className="klg-pad" style={{ maxWidth: 'var(--container)', margin: '0 auto', padding: '0 var(--gutter)', width: '100%' }}>
           <div style={{ maxWidth: 800 }}>
             <h1 style={{ margin: '0 0 16px', fontFamily: 'var(--font-mono)', fontWeight: 500, fontSize: 12, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--gold-300)' }}>Firma de Auditores Financieros · Caracas, Venezuela</h1>
