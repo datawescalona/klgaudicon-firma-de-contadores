@@ -80,8 +80,8 @@ function Hero({ go }) {
         <BinaryRain />
       </div>
 
-      <div style={{ position: 'relative', zIndex: 2, flexGrow: 1, display: 'flex', alignItems: 'flex-start', paddingTop: 180, paddingBottom: 30 }}>
-        <div className="klg-pad" style={{ maxWidth: 'var(--container)', margin: '0 auto', padding: '0 var(--gutter)', width: '100%' }}>
+      <div className="klg-hero-content" style={{ position: 'relative', zIndex: 2, flexGrow: 1, display: 'flex', alignItems: 'flex-start', paddingTop: 180, paddingBottom: 30 }}>
+        <div className="klg-pad klg-hero-textblock" style={{ maxWidth: 'var(--container)', margin: '0 auto', padding: '0 var(--gutter)', width: '100%' }}>
           <div style={{ maxWidth: 800 }}>
             <h1 style={{ margin: '0 0 16px', fontFamily: 'var(--font-mono)', fontWeight: 500, fontSize: 12, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--gold-300)' }}>Firma de Auditores Financieros · Caracas, Venezuela</h1>
             <h2 style={{ fontSize: 'clamp(2rem, 4.2vw, 3.7rem)', lineHeight: 1.05, color: '#fff', margin: 0, letterSpacing: '-0.025em' }}>
@@ -126,7 +126,7 @@ function ServicesGrid({ go }) {
         <div className="klg-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-5)' }}>
           {window.KLG_SERVICES.map((s) => (
             <ServiceCard key={s.id} icon={<Icon n={s.icon} s={24} />} title={s.title} tone={s.tone} tilt={false}
-              badge={<Badge tone={s.gancho ? 'bronze' : 'ink'} className={s.gancho ? 'klg-badge-pulse' : undefined}>{s.tag}</Badge>}
+              badge={<Badge tone="bronze" className={s.gancho ? 'klg-badge-pulse' : undefined}>{s.tag}</Badge>}
               cta={s.gancho ? 'Quiero esto' : 'Ver servicio'} onClick={(e) => { e.preventDefault(); go('servicio:' + s.id); }} href="#">
               {s.blurb}
             </ServiceCard>

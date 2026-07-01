@@ -1,5 +1,9 @@
 // KLG AUDICON — shared site data + helpers for the UI kit
 const KLG_SERVICES = [
+  { id:'tributos', icon:'shield-check', tone:'cobalt',
+    title:'Cumplimiento tributario',
+    blurb:'IVA, ISLR, IGTF, IGP y retenciones declaradas correctamente y en plazo. Cero multas. Cero sorpresas del SENIAT.',
+    tag:'SENIAT' },
   { id:'auditoria', icon:'search-check', tone:'cobalt',
     title:'Auditorías financieras y administrativas',
     blurb:'Verificamos que tus estados financieros sean reales, detectamos irregularidades y emitimos una opinión profesional independiente.',
@@ -8,22 +12,18 @@ const KLG_SERVICES = [
     title:'Outsourcing contable',
     blurb:'Tu contabilidad completa en nuestras manos: estados financieros, libros legales, conciliaciones y ajuste por inflación.',
     tag:'Mensual' },
+  { id:'costos', icon:'layers', tone:'cobalt',
+    title:'Gestión de Costos',
+    blurb:'Determinamos cuánto te cuesta producir, identificamos ineficiencias y protegemos tu margen real de ganancia.',
+    tag:'Rentabilidad' },
   { id:'nomina', icon:'users-round', tone:'cobalt',
     title:'Outsourcing de nómina',
     blurb:'Procesamos tu nómina, gestionamos los reportes parafiscales (INCES, Seguridad Social) y liquidamos beneficios laborales sin errores.',
     tag:'Parafiscales' },
-  { id:'tributos', icon:'shield-check', tone:'cobalt',
-    title:'Cumplimiento tributario',
-    blurb:'IVA, ISLR, IGTF, IGP y retenciones declaradas correctamente y en plazo. Cero multas. Cero sorpresas del SENIAT.',
-    tag:'SENIAT' },
-  { id:'conciliacion', icon:'banknote', tone:'bronze',
-    title:'Conciliaciones bancarias express',
-    blurb:'Comparamos tus libros contra los estados de cuenta bancarios y entregamos el reporte de diferencias en 24 horas.',
-    tag:'24h', gancho:true },
-  { id:'costos', icon:'layers', tone:'cobalt',
-    title:'Estructuras de costos',
-    blurb:'Diseñamos la estructura de costos de tu empresa, identificamos ineficiencias y determinamos tu cadena de valor real.',
-    tag:'Consultoría' },
+  { id:'consultoria', icon:'compass', tone:'cobalt',
+    title:'Consultorías Contables y Fiscales',
+    blurb:'Asesoría estratégica en materia contable y fiscal para respaldar las decisiones financieras de tu empresa.',
+    tag:'Asesoría' },
 ];
 
 const KLG_SECTORS = [
@@ -63,7 +63,7 @@ const KLG_POSTS = [
 // + "Consultoría" como enlace directo sin submenú. Rutas nuevas (carpeta padre/hija, con guiones).
 const KLG_NAV_MENU = [
   { id: 'tributario', label: 'Tributario', href: 'cumplimiento-tributario/',
-    featured: { label: 'Declaración de IVA', href: 'cumplimiento-tributario/declaracion-iva/', desc: 'Tu declaración de IVA lista y a tiempo, cada mes.' },
+    featured: { label: 'Declaración de ISLR', href: 'cumplimiento-tributario/declaracion-islr/', desc: 'Tu declaración de ISLR lista y a tiempo, antes del vencimiento.' },
     children: [
     { label: 'Declaración de ISLR', href: 'cumplimiento-tributario/declaracion-islr/', icon: 'file-text', desc: 'Declaración anual de ISLR lista antes del vencimiento.' },
     { label: 'Declaración de IVA', href: 'cumplimiento-tributario/declaracion-iva/', icon: 'receipt', desc: 'Declaración mensual de IVA sin errores ni retrasos.' },

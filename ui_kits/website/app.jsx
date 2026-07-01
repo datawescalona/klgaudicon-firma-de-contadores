@@ -6,14 +6,14 @@ const { FloatingWA, SiteNav, SiteFooter, BackToTop } = window;
 // view id  ->  relative path (folder per route, trailing slash)
 const KLG_ROUTES = {
   'home': '',
-  'servicio:auditoria': 'auditoria/',
-  'servicio:outsourcing': 'contable/',
-  'servicio:nomina': 'nomina/',
-  'servicio:tributos': 'tributos/',
-  'servicio:costos': 'costos/',
-  'servicio:conciliacion': 'conciliacion/',
+  'servicio:auditoria': 'auditorias/',
+  'servicio:outsourcing': 'outsourcing-contable/',
+  'servicio:nomina': 'outsourcing-de-nomina/',
+  'servicio:tributos': 'cumplimiento-tributario/',
+  'servicio:costos': 'consultoria-costos/',
+  'servicio:consultoria': 'consultoria-asesoria-contable-fiscal/',
   'blog': 'blog/',
-  'contacto': 'contacto/',
+  'contacto': 'contactanos/',
 };
 window.KLG_ROUTES = KLG_ROUTES;
 
