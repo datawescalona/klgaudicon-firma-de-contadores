@@ -26,7 +26,7 @@ const NAV_THEME = {
   },
 };
 
-// (antiguo megamenú único de Servicios reemplazado por dropdowns por categoría — ver CatDropdown más abajo)
+// (antiguo megamenú único de Servicios reemplazado por dropdowns por categoría — ver CatDropdownContent más abajo)
 
 function useNavTheme(view) {
   const [theme, setTheme] = React.useState(window.KLG_INITIAL === 'home' || !window.KLG_INITIAL ? 'dark' : 'light');
@@ -65,19 +65,19 @@ function useNavTheme(view) {
   return [theme, headerRef, scrolled];
 }
 
-// Dropdown por categoría — grid de 2 columnas: ícono + título corto + descripción de una línea por hija.
-// Se ancla debajo de su propio trigger (no al centro del viewport, porque ahora hay 5 triggers distintos).
-function CatDropdown({ cat, go, align }) {
+// Contenido del dropdown por categoría — grid de 2 columnas: ícono + título corto + descripción de una línea por hija.
+// Todas las categorías comparten el MISMO ancho y alto (calculados en SiteNav) y se despliegan siempre
+// centradas bajo la fila de menú (Tributario…Consultoría), sin importar cuál trigger las abrió.
+// `measuring`: variante usada solo para medir alto natural (sin image-slot, para no duplicar su id en el DOM).
+function ddOuterStyle(cat) {
+  return { display: 'grid', gridTemplateColumns: cat.featured ? '1.4fr auto 1fr' : '1fr', gap: 16, padding: 18 };
+}
+
+function CatDropdownContent({ cat, go, measuring }) {
   const base = window.KLG_BASE || '';
   const cols = cat.children.length > 4 ? '1fr 1fr' : '1fr';
-  const posStyle = align === 'right' ? { right: 0 } : { left: 0 };
   return (
-    <div style={{
-      position: 'absolute', top: 'calc(100% + 8px)', ...posStyle,
-      width: 'min(600px, calc(100vw - 32px))', background: '#fff', borderRadius: 18,
-      boxShadow: '0 30px 70px rgba(9,13,30,0.28)', border: '1px solid rgba(20,21,27,0.06)',
-      padding: 18, display: 'grid', gridTemplateColumns: cat.featured ? '1.4fr 1fr' : '1fr', gap: 16, zIndex: 60,
-    }}>
+    <React.Fragment>
       <div style={{ display: 'grid', gridTemplateColumns: cols, gap: 4, alignContent: 'start' }}>
         {cat.children.map((c) => (
           <a key={c.href} href={base + c.href}
@@ -94,11 +94,20 @@ function CatDropdown({ cat, go, align }) {
         ))}
       </div>
       {cat.featured && (
+        <React.Fragment>
+          {/* línea decorativa dorada entre el contenido y la foto destacada */}
+          <div aria-hidden="true" style={{
+            width: 1, alignSelf: 'stretch', borderRadius: 1,
+            background: 'linear-gradient(180deg, rgba(194,162,99,0) 0%, var(--gold-500) 16%, var(--gold-500) 84%, rgba(194,162,99,0) 100%)',
+          }}></div>
+          {measuring ? (
+        <div style={{ borderRadius: 14, minHeight: 230 }}></div>
+      ) : (
         <a href={base + cat.featured.href} onClick={(e) => { if (!window.KLG_PAGES) { e.preventDefault(); go('page:' + cat.featured.href); } }}
           style={{ position: 'relative', borderRadius: 14, overflow: 'hidden', textDecoration: 'none', background: 'var(--navy-950)', minHeight: 230, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
           <image-slot id={'mega-' + cat.id} fit="cover"
             placeholder={'Foto — ' + cat.featured.label}
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }}></image-slot>
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block', color: 'rgba(255,255,255,0.55)' }}></image-slot>
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, var(--navy-950) 20%, rgba(9,13,30,0.15) 78%)' }}></div>
           <div style={{ position: 'relative', padding: 16 }}>
             <span style={{ display: 'inline-block', fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--navy-950)', background: 'var(--gold-500)', padding: '4px 9px', borderRadius: 999 }}>Más buscado</span>
@@ -107,8 +116,10 @@ function CatDropdown({ cat, go, align }) {
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--gold-300)', fontWeight: 700, fontSize: 12.5, marginTop: 11 }}>Quiero esto <Icon n="arrow-right" s={14} /></span>
           </div>
         </a>
+          )}
+        </React.Fragment>
       )}
-    </div>
+    </React.Fragment>
   );
 }
 
@@ -121,6 +132,45 @@ function SiteNav({ view, go }) {
   const t = NAV_THEME[theme] || NAV_THEME.light;
   const navMenu = window.KLG_NAV_MENU || [];
   const consultoria = window.KLG_NAV_CONSULTORIA || { label: 'Consultoría', href: 'consultoria-asesoria-contable-fiscal/' };
+  const activeCat = navMenu.find((c) => c.id === openCat) || null;
+
+  // Todos los dropdowns comparten un único ancho y alto: ancho = fila de links (Tributario…Consultoría) + margen,
+  // alto = el más alto entre todas las categorías (medido una vez, off-screen, con `measuring`).
+  const navWrapRef = React.useRef(null);
+  const catMeasureRefs = React.useRef({});
+  const [ddSize, setDdSize] = React.useState({ width: 600, height: 320 });
+
+  React.useEffect(() => {
+    const measure = () => {
+      const el = navWrapRef.current;
+      // el nav desktop puede estar display:none (móvil/tablet, breakpoint 1180px) — offsetWidth da 0 ahí.
+      // Ignorar esa lectura evita que el panel se "achique" a un ancho mínimo y quede roto al pasar a escritorio.
+      if (!el || el.offsetWidth === 0) return;
+      const w = Math.round(el.offsetWidth) + 56;
+      setDdSize((s) => (s.width === w ? s : { ...s, width: w }));
+    };
+    measure();
+    const tId = setTimeout(measure, 250);
+    window.addEventListener('resize', measure);
+    let ro;
+    if (navWrapRef.current && typeof ResizeObserver !== 'undefined') {
+      ro = new ResizeObserver(measure);
+      ro.observe(navWrapRef.current);
+    }
+    return () => { window.removeEventListener('resize', measure); clearTimeout(tId); if (ro) ro.disconnect(); };
+  }, [navMenu.length]);
+
+  React.useEffect(() => {
+    const raf = requestAnimationFrame(() => {
+      let max = 0;
+      navMenu.forEach((cat) => {
+        const el = catMeasureRefs.current[cat.id];
+        if (el) max = Math.max(max, el.offsetHeight);
+      });
+      if (max > 0) setDdSize((s) => (s.height === max ? s : { ...s, height: max }));
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [ddSize.width, navMenu]);
 
   React.useEffect(() => {
     document.body.style.overflow = mobile ? 'hidden' : '';
@@ -147,15 +197,40 @@ function SiteNav({ view, go }) {
           </a>
 
           {/* desktop links — el logo ya ancla "Inicio", no se repite en el menú */}
-          <nav className="klg-nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: 0, flexGrow: 1 }}>
-            {navMenu.map((cat, i) => (
-              <div key={cat.id} style={{ position: 'relative' }} onMouseEnter={() => openCatMenu(cat.id)} onMouseLeave={closeCatMenu}>
-                <NavLink t={t} active={openCat === cat.id} label={cat.label} href={(window.KLG_BASE || '') + cat.href}
-                  caret caretOpen={openCat === cat.id} onClick={() => navToPage(cat.href)} />
-                {openCat === cat.id && <CatDropdown cat={cat} go={navTo} align={i < 3 ? 'left' : 'right'} />}
+          <nav className="klg-nav-desktop" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0, flexGrow: 1 }}>
+            <div ref={navWrapRef} style={{ display: 'flex', alignItems: 'center', gap: 0, position: 'relative' }}>
+              {navMenu.map((cat) => (
+                <div key={cat.id} style={{ position: 'relative' }} onMouseEnter={() => openCatMenu(cat.id)} onMouseLeave={closeCatMenu}>
+                  <NavLink t={t} active={openCat === cat.id} label={cat.label} href={(window.KLG_BASE || '') + cat.href}
+                    caret caretOpen={openCat === cat.id} onClick={() => navToPage(cat.href)} />
+                </div>
+              ))}
+              <NavLink t={t} active={false} label={consultoria.label} href={(window.KLG_BASE || '') + consultoria.href} onClick={() => navToPage(consultoria.href)} />
+
+              {/* dropdown único, mismo ancho/alto para las 5 categorías, siempre centrado bajo Tributario…Consultoría */}
+              {activeCat && (
+                <div onMouseEnter={() => openCatMenu(activeCat.id)} onMouseLeave={closeCatMenu}
+                  style={{
+                    position: 'absolute', top: 'calc(100% + 22px)', left: '50%', transform: 'translateX(-50%)',
+                    width: ddSize.width, height: ddSize.height, maxWidth: 'calc(100vw - 32px)',
+                    background: '#fff', borderRadius: 18,
+                    boxShadow: '0 30px 70px rgba(9,13,30,0.28)', border: '1px solid rgba(20,21,27,0.06)',
+                    zIndex: 60, overflow: 'hidden', ...ddOuterStyle(activeCat),
+                  }}>
+                  <CatDropdownContent cat={activeCat} go={navTo} />
+                </div>
+              )}
+
+              {/* clones ocultos solo para medir el alto natural de cada categoría (sin image-slot, para no duplicar ids) */}
+              <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, visibility: 'hidden', pointerEvents: 'none', zIndex: -1 }}>
+                {navMenu.map((cat) => (
+                  <div key={cat.id} ref={(el) => { catMeasureRefs.current[cat.id] = el; }}
+                    style={{ width: ddSize.width, ...ddOuterStyle(cat) }}>
+                    <CatDropdownContent cat={cat} go={navTo} measuring />
+                  </div>
+                ))}
               </div>
-            ))}
-            <NavLink t={t} active={false} label={consultoria.label} href={(window.KLG_BASE || '') + consultoria.href} onClick={() => navToPage(consultoria.href)} />
+            </div>
           </nav>
 
           {/* desktop CTA — reemplaza "Hablemos" + el ítem "Contacto": cumple ambas funciones */}
@@ -177,7 +252,9 @@ function SiteNav({ view, go }) {
         display: mobile ? 'flex' : 'none', flexDirection: 'column',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 22px', borderBottom: '1px solid rgba(255,255,255,0.12)' }}>
+          <a href={window.KLG_BASE || ''} onClick={(e) => { if (!window.KLG_PAGES) { e.preventDefault(); navTo('home'); } else { setMobile(false); } }} aria-label="Ir al inicio" style={{ display: 'flex', alignItems: 'center' }}>
           <img src="data:image/png;base64,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" alt="KLG AUDICON" style={{ height: 24 }} />
+          </a>
           <button onClick={() => setMobile(false)} aria-label="Cerrar" style={{ background: 'transparent', border: 0, color: '#fff', cursor: 'pointer', padding: 4 }}><Icon n="x" s={28} /></button>
         </div>
         <div style={{ flexGrow: 1, overflowY: 'auto', padding: '12px 22px 28px' }}>
