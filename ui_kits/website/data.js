@@ -59,4 +59,52 @@ const KLG_POSTS = [
     excerpt:'Cómo comparar honorarios, riesgo de sanción y horas-hombre de forma honesta.' },
 ];
 
-Object.assign(window, { KLG_SERVICES, KLG_SECTORS, KLG_REASONS, KLG_POSTS });
+// Menú principal — 5 categorías con submenú (ícono + título corto + descripción de una línea)
+// + "Consultoría" como enlace directo sin submenú. Rutas nuevas (carpeta padre/hija, con guiones).
+const KLG_NAV_MENU = [
+  { id: 'tributario', label: 'Tributario', href: 'cumplimiento-tributario/',
+    featured: { label: 'Declaración de IVA', href: 'cumplimiento-tributario/declaracion-iva/', desc: 'Tu declaración de IVA lista y a tiempo, cada mes.' },
+    children: [
+    { label: 'Declaración de ISLR', href: 'cumplimiento-tributario/declaracion-islr/', icon: 'file-text', desc: 'Declaración anual de ISLR lista antes del vencimiento.' },
+    { label: 'Declaración de IVA', href: 'cumplimiento-tributario/declaracion-iva/', icon: 'receipt', desc: 'Declaración mensual de IVA sin errores ni retrasos.' },
+    { label: 'Declaración de IGTF', href: 'cumplimiento-tributario/declaracion-igtf/', icon: 'banknote', desc: 'Impuesto a las Grandes Transacciones Financieras al día.' },
+    { label: 'Declaración de IGP', href: 'cumplimiento-tributario/declaracion-igp/', icon: 'building-2', desc: 'Impuesto a los Grandes Patrimonios sin sorpresas.' },
+    { label: 'Impuesto a las Pensiones', href: 'cumplimiento-tributario/impuesto-pensiones/', icon: 'piggy-bank', desc: 'Cálculo y cumplimiento del impuesto a las pensiones.' },
+  ] },
+  { id: 'auditorias', label: 'Auditorías', href: 'auditorias/',
+    featured: { label: 'Auditoría Financiera', href: 'auditorias/auditoria-financiera/', desc: 'Verificamos que tus estados financieros reflejen la realidad.' },
+    children: [
+    { label: 'Auditoría Financiera', href: 'auditorias/auditoria-financiera/', icon: 'file-search', desc: 'Verificamos que tus estados financieros reflejen la realidad.' },
+    { label: 'Auditoría de Gestión y Administrativa', href: 'auditorias/auditoria-gestion-administrativa/', icon: 'clipboard-check', desc: 'Evaluamos la eficiencia de tus procesos administrativos.' },
+    { label: 'Auditoría de Estados Financieros', href: 'auditorias/auditoria-estados-financieros/', icon: 'file-bar-chart', desc: 'Opinión profesional independiente sobre tus estados financieros.' },
+    { label: 'Auditoría Interna', href: 'auditorias/auditoria-interna/', icon: 'shield', desc: 'Control interno permanente para prevenir riesgos.' },
+    { label: 'Auditoría Externa', href: 'auditorias/auditoria-externa/', icon: 'search', desc: 'Revisión independiente exigida por accionistas o entes reguladores.' },
+    { label: 'Auditoría de Cumplimiento', href: 'auditorias/auditoria-cumplimiento/', icon: 'scale', desc: 'Verificamos el cumplimiento normativo y regulatorio.' },
+  ] },
+  { id: 'contable', label: 'Contable', href: 'outsourcing-contable/',
+    featured: { label: 'Conciliaciones Bancarias', href: 'outsourcing-contable/conciliaciones-bancarias/', desc: 'Tu conciliación bancaria lista en 24 horas.' },
+    children: [
+    { label: 'Conciliaciones Bancarias', href: 'outsourcing-contable/conciliaciones-bancarias/', icon: 'banknote', desc: 'Diferencias entre libros y banco resueltas en 24 horas.' },
+    { label: 'Ajuste por Inflación', href: 'outsourcing-contable/ajuste-por-inflacion/', icon: 'trending-up', desc: 'Reexpresión de tus estados financieros según la normativa vigente.' },
+    { label: 'Libros Legales', href: 'outsourcing-contable/libros-legales/', icon: 'book-marked', desc: 'Libros contables al día y listos para cualquier fiscalización.' },
+    { label: 'Análisis de Cuentas', href: 'outsourcing-contable/analisis-de-cuentas/', icon: 'list-checks', desc: 'Depuración y análisis detallado de tus cuentas contables.' },
+    { label: 'Balances de Comprobación', href: 'outsourcing-contable/balances-de-comprobacion/', icon: 'clipboard-list', desc: 'Balances de comprobación preparados con precisión mensual.' },
+  ] },
+  { id: 'costos', label: 'Costos', href: 'consultoria-costos/',
+    featured: { label: 'Estructura de Costos', href: 'consultoria-costos/estructura-de-costos/', desc: 'Diseñamos la estructura de costos real de tu operación.' },
+    children: [
+    { label: 'Estructura de Costos', href: 'consultoria-costos/estructura-de-costos/', icon: 'layers', desc: 'Diseñamos la estructura de costos real de tu operación.' },
+    { label: 'Estudio de Procesos Productivos', href: 'consultoria-costos/estudio-procesos-productivos/', icon: 'settings', desc: 'Identificamos ineficiencias en tus procesos productivos.' },
+    { label: 'Análisis de Cadena de Valor', href: 'consultoria-costos/cadena-de-valor/', icon: 'workflow', desc: 'Mapeamos tu cadena de valor para decisiones más rentables.' },
+  ] },
+  { id: 'nomina', label: 'Nómina', href: 'outsourcing-de-nomina/',
+    featured: { label: 'Finiquitos y Prestaciones', href: 'outsourcing-de-nomina/finiquitos-prestaciones/', desc: 'Cálculo correcto de finiquitos y prestaciones sociales.' },
+    children: [
+    { label: 'Finiquitos y Prestaciones', href: 'outsourcing-de-nomina/finiquitos-prestaciones/', icon: 'user-minus', desc: 'Cálculo correcto de finiquitos y prestaciones sociales.' },
+    { label: 'Reportes Parafiscales', href: 'outsourcing-de-nomina/reportes-parafiscales-inces/', icon: 'file-text', desc: 'Reportes de INCES y Seguridad Social siempre al día.' },
+    { label: 'Recibos y Reportes de Nómina', href: 'outsourcing-de-nomina/recibos-reportes-nomina/', icon: 'receipt-text', desc: 'Recibos de pago y reportes de nómina sin errores.' },
+  ] },
+];
+const KLG_NAV_CONSULTORIA = { label: 'Consultoría', href: 'consultoria-asesoria-contable-fiscal/' };
+
+Object.assign(window, { KLG_SERVICES, KLG_SECTORS, KLG_REASONS, KLG_POSTS, KLG_NAV_MENU, KLG_NAV_CONSULTORIA });
