@@ -4,7 +4,7 @@
 
 // KLG AUDICON — full-width, scroll-following header that adapts its theme to the
 // section behind it (dark sections → light text + white logo; light sections →
-// dark text + cobalt logo). Desktop megamenu for Servicios + mobile hamburger.
+// dark text + cobalt logo). Desktop: 5 dropdowns por categoría + Consultoría directo + mobile hamburger.
 const { Button } = window.DesignSystem_b17006;
 
 const NAV_THEME = {
@@ -26,15 +26,7 @@ const NAV_THEME = {
   },
 };
 
-// value props shown in the megamenu, keyed by service id
-const SERVICE_PROPS = {
-  auditoria: 'Detecta riesgos antes que el SENIAT.',
-  outsourcing: 'Tu contabilidad completa, sin errores.',
-  nomina: 'Nómina y parafiscales siempre al día.',
-  tributos: 'IVA, ISLR e IGTF sin multas.',
-  costos: 'Conoce el costo real de tu operación.',
-  conciliacion: 'Tus diferencias bancarias resueltas en 24 h.',
-};
+// (antiguo megamenú único de Servicios reemplazado por dropdowns por categoría — ver CatDropdown más abajo)
 
 function useNavTheme(view) {
   const [theme, setTheme] = React.useState(window.KLG_INITIAL === 'home' || !window.KLG_INITIAL ? 'dark' : 'light');
@@ -73,74 +65,73 @@ function useNavTheme(view) {
   return [theme, headerRef, scrolled];
 }
 
-function MegaPanel({ go }) {
-  const services = window.KLG_SERVICES || [];
+// Dropdown por categoría — grid de 2 columnas: ícono + título corto + descripción de una línea por hija.
+// Se ancla debajo de su propio trigger (no al centro del viewport, porque ahora hay 5 triggers distintos).
+function CatDropdown({ cat, go, align }) {
+  const base = window.KLG_BASE || '';
+  const cols = cat.children.length > 4 ? '1fr 1fr' : '1fr';
+  const posStyle = align === 'right' ? { right: 0 } : { left: 0 };
   return (
     <div style={{
-      position: 'fixed', top: 76, left: '50%', transform: 'translateX(-50%)',
-      width: 'min(880px, calc(100vw - 32px))', background: '#fff', borderRadius: 20,
+      position: 'absolute', top: 'calc(100% + 8px)', ...posStyle,
+      width: 'min(600px, calc(100vw - 32px))', background: '#fff', borderRadius: 18,
       boxShadow: '0 30px 70px rgba(9,13,30,0.28)', border: '1px solid rgba(20,21,27,0.06)',
-      padding: 26, display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: 26, zIndex: 60,
+      padding: 18, display: 'grid', gridTemplateColumns: cat.featured ? '1.4fr 1fr' : '1fr', gap: 16, zIndex: 60,
     }}>
-      <div>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 14 }}>Áreas de práctica</div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
-          {services.map((s) => (
-            <a key={s.id} href={(window.KLG_BASE || '') + (window.KLG_ROUTES['servicio:' + s.id] || '')}
-              onClick={(e) => { if (!window.KLG_PAGES) { e.preventDefault(); go('servicio:' + s.id); } }}
-              style={{ display: 'flex', gap: 12, padding: '11px 12px', borderRadius: 12, textDecoration: 'none', transition: 'background 160ms' }}
-              onMouseEnter={(e) => e.currentTarget.style.background = 'var(--cobalt-050)'}
-              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
-              <span style={{ width: 38, height: 38, flexShrink: 0, borderRadius: 9, background: s.gancho ? 'var(--gold-100)' : 'var(--cobalt-050)', color: s.gancho ? 'var(--gold-700)' : 'var(--cobalt-700)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}><Icon n={s.icon} s={19} /></span>
-              <span>
-                <span style={{ display: 'block', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 14.5, color: 'var(--text-strong)', lineHeight: 1.2 }}>{s.title.split(' ').slice(0, 2).join(' ')}</span>
-                <span style={{ display: 'block', fontSize: 12.5, color: 'var(--text-muted)', marginTop: 2, lineHeight: 1.35 }}>{SERVICE_PROPS[s.id] || ''}</span>
-              </span>
-            </a>
-          ))}
-        </div>
+      <div style={{ display: 'grid', gridTemplateColumns: cols, gap: 4, alignContent: 'start' }}>
+        {cat.children.map((c) => (
+          <a key={c.href} href={base + c.href}
+            onClick={(e) => { if (!window.KLG_PAGES) { e.preventDefault(); go('page:' + c.href); } }}
+            style={{ display: 'flex', gap: 11, padding: '10px 10px', borderRadius: 12, textDecoration: 'none', transition: 'background 160ms' }}
+            onMouseEnter={(e) => e.currentTarget.style.background = 'var(--cobalt-050)'}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
+            <span style={{ width: 34, height: 34, flexShrink: 0, borderRadius: 9, background: 'var(--cobalt-050)', color: 'var(--cobalt-700)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}><Icon n={c.icon} s={17} /></span>
+            <span>
+              <span style={{ display: 'block', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 13.5, color: 'var(--text-strong)', lineHeight: 1.25 }}>{c.label}</span>
+              <span style={{ display: 'block', fontSize: 11.5, color: 'var(--text-muted)', marginTop: 2, lineHeight: 1.35 }}>{c.desc}</span>
+            </span>
+          </a>
+        ))}
       </div>
-      <a href={(window.KLG_BASE || '') + (window.KLG_ROUTES['servicio:conciliacion'] || 'contacto/')}
-        onClick={(e) => { if (!window.KLG_PAGES) { e.preventDefault(); go('servicio:conciliacion'); } }}
-        style={{ position: 'relative', borderRadius: 16, overflow: 'hidden', textDecoration: 'none', background: 'var(--navy-950)', minHeight: 240, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
-        <image-slot id="mega-feat" fit="cover"
-          src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1200&auto=format&fit=crop"
-          placeholder="Imagen servicio destacado"
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block', opacity: 0.5 }}></image-slot>
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, var(--navy-950) 10%, rgba(9,13,30,0.2) 75%)' }}></div>
-        <div style={{ position: 'relative', padding: 20 }}>
-          <span style={{ display: 'inline-block', fontFamily: 'var(--font-mono)', fontSize: 10.5, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--navy-950)', background: 'var(--gold-500)', padding: '4px 9px', borderRadius: 999 }}>Producto gancho · 24 h</span>
-          <div style={{ color: '#fff', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 18, marginTop: 10 }}>Conciliación Express</div>
-          <div style={{ color: 'rgba(255,255,255,0.78)', fontSize: 13, marginTop: 4 }}>Tu conciliación bancaria lista en 24 horas.</div>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--gold-300)', fontWeight: 700, fontSize: 13, marginTop: 12 }}>Quiero esto <Icon n="arrow-right" s={15} /></span>
-        </div>
-      </a>
+      {cat.featured && (
+        <a href={base + cat.featured.href} onClick={(e) => { if (!window.KLG_PAGES) { e.preventDefault(); go('page:' + cat.featured.href); } }}
+          style={{ position: 'relative', borderRadius: 14, overflow: 'hidden', textDecoration: 'none', background: 'var(--navy-950)', minHeight: 230, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+          <image-slot id={'mega-' + cat.id} fit="cover"
+            placeholder={'Foto — ' + cat.featured.label}
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }}></image-slot>
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, var(--navy-950) 20%, rgba(9,13,30,0.15) 78%)' }}></div>
+          <div style={{ position: 'relative', padding: 16 }}>
+            <span style={{ display: 'inline-block', fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--navy-950)', background: 'var(--gold-500)', padding: '4px 9px', borderRadius: 999 }}>Más buscado</span>
+            <div style={{ color: '#fff', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 16, marginTop: 9 }}>{cat.featured.label}</div>
+            <div style={{ color: 'rgba(255,255,255,0.78)', fontSize: 12.5, marginTop: 4, lineHeight: 1.4 }}>{cat.featured.desc}</div>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--gold-300)', fontWeight: 700, fontSize: 12.5, marginTop: 11 }}>Quiero esto <Icon n="arrow-right" s={14} /></span>
+          </div>
+        </a>
+      )}
     </div>
   );
 }
 
 function SiteNav({ view, go }) {
   const [theme, headerRef, scrolled] = useNavTheme(view);
-  const [mega, setMega] = React.useState(false);
+  const [openCat, setOpenCat] = React.useState(null);
   const [mobile, setMobile] = React.useState(false);
-  const [mAcc, setMAcc] = React.useState(false);
+  const [mAcc, setMAcc] = React.useState(null);
   const closeT = React.useRef(0);
   const t = NAV_THEME[theme] || NAV_THEME.light;
+  const navMenu = window.KLG_NAV_MENU || [];
+  const consultoria = window.KLG_NAV_CONSULTORIA || { label: 'Consultoría', href: 'consultoria-asesoria-contable-fiscal/' };
 
   React.useEffect(() => {
     document.body.style.overflow = mobile ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [mobile]);
 
-  const openMega = () => { clearTimeout(closeT.current); setMega(true); };
-  const closeMega = () => { closeT.current = setTimeout(() => setMega(false), 140); };
+  const openCatMenu = (id) => { clearTimeout(closeT.current); setOpenCat(id); };
+  const closeCatMenu = () => { closeT.current = setTimeout(() => setOpenCat(null), 140); };
 
-  const topLinks = [
-    { id: 'home', label: 'Inicio' },
-    { id: 'blog', label: 'Blog' },
-    { id: 'contacto', label: 'Contacto' },
-  ];
   const navTo = (id) => { setMobile(false); go(id); };
+  const navToPage = (href) => { setMobile(false); if (window.KLG_PAGES) { window.location.href = (window.KLG_BASE || '') + href; } };
 
   return (
     <React.Fragment>
@@ -155,21 +146,21 @@ function SiteNav({ view, go }) {
             <img src={t.logo} alt="KLG AUDICON" style={{ height: 24, display: 'block', transition: 'opacity 200ms' }} />
           </a>
 
-          {/* desktop links */}
-          <nav className="klg-nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: 4, flexGrow: 1 }}>
-            <NavLink t={t} active={view === 'home'} label="Inicio" href={window.KLG_BASE || ''} onClick={() => navTo('home')} />
-            {/* Servicios megamenu trigger */}
-            <div style={{ position: 'relative' }} onMouseEnter={openMega} onMouseLeave={closeMega}>
-              <NavLink t={t} active={view.startsWith('servicio') || mega} label="Servicios" as="button" caret caretOpen={mega} onClick={() => setMega((v) => !v)} />
-              {mega && <MegaPanel go={navTo} />}
-            </div>
-            <NavLink t={t} active={view === 'blog'} label="Blog" href={(window.KLG_BASE || '') + 'blog/'} onClick={() => navTo('blog')} />
-            <NavLink t={t} active={view === 'contacto'} label="Contacto" href={(window.KLG_BASE || '') + 'contacto/'} onClick={() => navTo('contacto')} />
+          {/* desktop links — el logo ya ancla "Inicio", no se repite en el menú */}
+          <nav className="klg-nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: 0, flexGrow: 1 }}>
+            {navMenu.map((cat, i) => (
+              <div key={cat.id} style={{ position: 'relative' }} onMouseEnter={() => openCatMenu(cat.id)} onMouseLeave={closeCatMenu}>
+                <NavLink t={t} active={openCat === cat.id} label={cat.label} href={(window.KLG_BASE || '') + cat.href}
+                  caret caretOpen={openCat === cat.id} onClick={() => navToPage(cat.href)} />
+                {openCat === cat.id && <CatDropdown cat={cat} go={navTo} align={i < 3 ? 'left' : 'right'} />}
+              </div>
+            ))}
+            <NavLink t={t} active={false} label={consultoria.label} href={(window.KLG_BASE || '') + consultoria.href} onClick={() => navToPage(consultoria.href)} />
           </nav>
 
-          {/* desktop CTA */}
+          {/* desktop CTA — reemplaza "Hablemos" + el ítem "Contacto": cumple ambas funciones */}
           <div className="klg-nav-desktop" style={{ flexShrink: 0 }}>
-            <Button variant="cta" size="sm" onClick={() => navTo('contacto')} style={{ border: 'none' }}>Hablemos</Button>
+            <Button variant="cta" size="sm" onClick={() => navTo('contacto')} style={{ border: 'none' }}>Contáctanos</Button>
           </div>
 
           {/* mobile hamburger */}
@@ -190,15 +181,22 @@ function SiteNav({ view, go }) {
           <button onClick={() => setMobile(false)} aria-label="Cerrar" style={{ background: 'transparent', border: 0, color: '#fff', cursor: 'pointer', padding: 4 }}><Icon n="x" s={28} /></button>
         </div>
         <div style={{ flexGrow: 1, overflowY: 'auto', padding: '12px 22px 28px' }}>
-          <MLink label="Inicio" onClick={() => navTo('home')} />
-          <MLink label="Servicios" onClick={() => setMAcc((v) => !v)} right={<span style={{ transform: mAcc ? 'rotate(180deg)' : 'none', transition: 'transform 200ms', display: 'inline-flex' }}><Icon n="chevron-down" s={20} /></span>} />
-          <div style={{ maxHeight: mAcc ? 460 : 0, overflow: 'hidden', transition: 'max-height 320ms var(--ease-out)' }}>
-            {(window.KLG_SERVICES || []).map((s) => (
-              <MSub key={s.id} s={s} onClick={() => navTo('servicio:' + s.id)} />
-            ))}
+          {navMenu.map((cat) => (
+            <React.Fragment key={cat.id}>
+              <MLink label={cat.label} onClick={() => setMAcc((v) => (v === cat.id ? null : cat.id))}
+                right={<span style={{ transform: mAcc === cat.id ? 'rotate(180deg)' : 'none', transition: 'transform 200ms', display: 'inline-flex' }}><Icon n="chevron-down" s={20} /></span>} />
+              <div style={{ maxHeight: mAcc === cat.id ? 720 : 0, overflow: 'hidden', transition: 'max-height 320ms var(--ease-out)' }}>
+                {cat.children.map((c) => (
+                  <MSub key={c.href} s={{ icon: c.icon, title: c.label }} onClick={() => navToPage(c.href)} />
+                ))}
+              </div>
+            </React.Fragment>
+          ))}
+          <MLink label={consultoria.label} onClick={() => navToPage(consultoria.href)} />
+
+          <div style={{ marginTop: 18 }}>
+            <Button variant="cta" size="lg" fullWidth onClick={() => navTo('contacto')} style={{ border: 'none' }}>Contáctanos</Button>
           </div>
-          <MLink label="Blog" onClick={() => navTo('blog')} />
-          <MLink label="Contacto" onClick={() => navTo('contacto')} />
 
           {/* contact + social — all clickable */}
           <div style={{ marginTop: 26, display: 'flex', flexDirection: 'column', gap: 4 }}>
@@ -248,7 +246,7 @@ function MSub({ s, onClick }) {
     <button onClick={onClick} onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
       style={{ display: 'flex', gap: 12, alignItems: 'center', width: '100%', textAlign: 'left', border: 0, borderRadius: 10, padding: '11px 12px', cursor: 'pointer', background: hov ? 'rgba(168,132,74,0.12)' : 'transparent', color: hov ? 'var(--gold-300)' : 'rgba(255,255,255,0.82)', transition: 'background 180ms var(--ease-out), color 180ms var(--ease-out)' }}>
       <span style={{ width: 34, height: 34, flexShrink: 0, borderRadius: 8, background: hov ? 'rgba(168,132,74,0.30)' : 'rgba(168,132,74,0.18)', color: 'var(--gold-400, #C2A263)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', transition: 'background 180ms var(--ease-out)' }}><Icon n={s.icon} s={17} /></span>
-      <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 16 }}>{s.title.split(' ').slice(0, 2).join(' ')}</span>
+      <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 15.5, lineHeight: 1.3 }}>{s.title}</span>
     </button>
   );
 }
@@ -290,12 +288,12 @@ function NavLink({ t, active, label, href, onClick, as, caret, caretOpen }) {
         {label}
         {caret && <span style={{ display: 'inline-flex', transform: caretOpen ? 'rotate(180deg)' : 'none', transition: 'transform 220ms var(--ease-out)' }}><Icon n="chevron-down" s={15} /></span>}
       </span>
-      <span style={{ position: 'absolute', left: 14, right: 14, bottom: 14, height: 2, borderRadius: 2, background: 'var(--gold-500)', transformOrigin: 'left center', transform: on ? 'scaleX(1)' : 'scaleX(0)', transition: 'transform 260ms var(--ease-out)' }}></span>
+      <span style={{ position: 'absolute', left: 11, right: 11, bottom: 14, height: 2, borderRadius: 2, background: 'var(--gold-500)', transformOrigin: 'left center', transform: on ? 'scaleX(1)' : 'scaleX(0)', transition: 'transform 260ms var(--ease-out)' }}></span>
     </React.Fragment>
   );
   const style = {
     position: 'relative', fontFamily: 'var(--font-sans)', fontSize: 15, fontWeight: 600,
-    color: on ? t.text : t.textMuted, textDecoration: 'none', padding: '22px 14px',
+    color: on ? t.text : t.textMuted, textDecoration: 'none', padding: '22px 11px',
     lineHeight: 1, whiteSpace: 'nowrap', background: 'transparent', border: 0, cursor: 'pointer',
     font: 'inherit', transition: 'color 220ms var(--ease-out)', fontWeight: 600,
   };
