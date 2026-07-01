@@ -278,7 +278,7 @@ a:hover { text-decoration: underline; }
   padding-bottom: clamp(60px, 7vh, 92px) !important;
 }
 /* Última sección de contenido pega con el footer: un solo padding moderado */
-.klg-sect-last { padding-bottom: clamp(36px, 4vh, 56px) !important; }
+.klg-sect-last { padding-bottom: clamp(90px, 11vh, 140px) !important; }
 
 /* ---- Marquee de normas (cinta continua sobre el banner, integrada al header) ---- */
 @keyframes klgMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -324,13 +324,6 @@ a:hover { text-decoration: underline; }
   50%      { box-shadow: 0 3px 10px rgba(15,23,42,0.16); }
 }
 .klg-badge-tone { animation: klgBadgeGlowTone 3.6s ease-in-out infinite; }
-
-/* Botón CTA: sombra que titila tenue y lento */
-@keyframes klgBtnGlow {
-  0%, 100% { box-shadow: 0 4px 14px rgba(15,23,42,0.10); }
-  50%      { box-shadow: 0 10px 30px rgba(15,23,42,0.26); }
-}
-.klg-btn-glow { animation: klgBtnGlow 3.2s ease-in-out infinite; border: none !important; }
 
 /* ServiceCard: borde dorado al pasar el mouse (override del borde inline) */
 .klg-service-card { transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), border-color 220ms var(--ease-out) !important; }
@@ -3450,6 +3443,10 @@ __ds_ns.PillNav = __ds_scope.PillNav;
 <script>
 // KLG AUDICON — shared site data + helpers for the UI kit
 const KLG_SERVICES = [
+  { id:'tributos', icon:'shield-check', tone:'cobalt',
+    title:'Cumplimiento tributario',
+    blurb:'IVA, ISLR, IGTF, IGP y retenciones declaradas correctamente y en plazo. Cero multas. Cero sorpresas del SENIAT.',
+    tag:'SENIAT' },
   { id:'auditoria', icon:'search-check', tone:'cobalt',
     title:'Auditorías financieras y administrativas',
     blurb:'Verificamos que tus estados financieros sean reales, detectamos irregularidades y emitimos una opinión profesional independiente.',
@@ -3458,22 +3455,18 @@ const KLG_SERVICES = [
     title:'Outsourcing contable',
     blurb:'Tu contabilidad completa en nuestras manos: estados financieros, libros legales, conciliaciones y ajuste por inflación.',
     tag:'Mensual' },
+  { id:'costos', icon:'layers', tone:'cobalt',
+    title:'Gestión de Costos',
+    blurb:'Determinamos cuánto te cuesta producir, identificamos ineficiencias y protegemos tu margen real de ganancia.',
+    tag:'Rentabilidad' },
   { id:'nomina', icon:'users-round', tone:'cobalt',
     title:'Outsourcing de nómina',
     blurb:'Procesamos tu nómina, gestionamos los reportes parafiscales (INCES, Seguridad Social) y liquidamos beneficios laborales sin errores.',
     tag:'Parafiscales' },
-  { id:'tributos', icon:'shield-check', tone:'cobalt',
-    title:'Cumplimiento tributario',
-    blurb:'IVA, ISLR, IGTF, IGP y retenciones declaradas correctamente y en plazo. Cero multas. Cero sorpresas del SENIAT.',
-    tag:'SENIAT' },
-  { id:'conciliacion', icon:'banknote', tone:'bronze',
-    title:'Conciliaciones bancarias express',
-    blurb:'Comparamos tus libros contra los estados de cuenta bancarios y entregamos el reporte de diferencias en 24 horas.',
-    tag:'24h', gancho:true },
-  { id:'costos', icon:'layers', tone:'cobalt',
-    title:'Estructuras de costos',
-    blurb:'Diseñamos la estructura de costos de tu empresa, identificamos ineficiencias y determinamos tu cadena de valor real.',
-    tag:'Consultoría' },
+  { id:'consultoria', icon:'compass', tone:'cobalt',
+    title:'Consultorías Contables y Fiscales',
+    blurb:'Asesoría estratégica en materia contable y fiscal para respaldar las decisiones financieras de tu empresa.',
+    tag:'Asesoría' },
 ];
 
 const KLG_SECTORS = [
@@ -3511,7 +3504,7 @@ const KLG_POSTS = [
 
 const KLG_NAV_MENU = [
   { id: 'tributario', label: 'Tributario', href: 'cumplimiento-tributario/',
-    featured: { label: 'Declaración de IVA', href: 'cumplimiento-tributario/declaracion-iva/', desc: 'Tu declaración de IVA lista y a tiempo, cada mes.' },
+    featured: { label: 'Declaración de ISLR', href: 'cumplimiento-tributario/declaracion-islr/', desc: 'Tu declaración de ISLR lista y a tiempo, antes del vencimiento.' },
     children: [
     { label: 'Declaración de ISLR', href: 'cumplimiento-tributario/declaracion-islr/', icon: 'file-text', desc: 'Declaración anual de ISLR lista antes del vencimiento.' },
     { label: 'Declaración de IVA', href: 'cumplimiento-tributario/declaracion-iva/', icon: 'receipt', desc: 'Declaración mensual de IVA sin errores ni retrasos.' },
@@ -3752,7 +3745,7 @@ function ServicesGrid({ go }) {
             <Reveal key={s.id} index={i} style={{ display: 'flex' }}>
               <ServiceCard className="klg-service-card" icon={<Icon n={s.icon} s={24} />} title={s.title} tone={s.tone} tilt={false}
                 style={{ flex: 1 }}
-                badge={<Badge tone={s.gancho ? 'bronze' : 'ink'} className="klg-badge-tone">{s.tag}</Badge>}
+                badge={<Badge tone="bronze" className="klg-badge-tone">{s.tag}</Badge>}
                 cta={s.gancho ? 'Quiero esto' : 'Ver servicio'} onClick={(e) => { e.preventDefault(); go('servicio:' + s.id); }} href="#">
                 {s.blurb}
               </ServiceCard>
@@ -4078,7 +4071,7 @@ function ProcesoBand({ go }) {
           <div className="klg-proceso-grid" style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--space-6)' }}>
             {steps.map((s, i) => (
               <div key={s.n} className="klg-proceso-step" style={{
-                position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 18,
+                position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 30,
                 opacity: shown ? 1 : 0,
                 transform: shown ? 'none' : 'translateY(18px)',
                 transition: `opacity 520ms var(--ease-out) ${260 + i * 130}ms, transform 600ms var(--ease-out) ${260 + i * 130}ms`,
@@ -4131,14 +4124,11 @@ function CTAFinal({ go }) {
           <p style={{ color: 'rgba(255,255,255,0.74)', fontSize: 'var(--fs-lead)', lineHeight: 1.6, maxWidth: 600, margin: '0 auto' }}>Cuéntanos tu situación. Sin compromiso. Sin costo por la consulta inicial. Respondemos en menos de 24 horas.</p>
 
           <div className="klg-ctafinal-btns" style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', marginTop: 32 }}>
-            <a href={wa} target="_blank" rel="noopener noreferrer" className="klg-btn-glow" style={{ display: 'inline-flex', alignItems: 'center', gap: 11, background: 'var(--whatsapp)', color: '#fff', textDecoration: 'none', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 16.5, padding: '16px 30px', borderRadius: 'var(--radius-pill)', border: 'none' }}>
+            <a href={wa} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 11, background: 'var(--whatsapp)', color: '#fff', textDecoration: 'none', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 16.5, padding: '16px 30px', borderRadius: '8px', border: 'none', boxShadow: '0 6px 16px rgba(37,211,102,0.28)', transition: 'transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out), background 200ms var(--ease-out)' }}
+              onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 28px rgba(37,211,102,0.48)'; e.currentTarget.style.background = '#1DA851'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(37,211,102,0.28)'; e.currentTarget.style.background = 'var(--whatsapp)'; }}>
               <Icon n="message-circle" s={20} /> Escribir por WhatsApp
             </a>
-            <button onClick={() => go('contacto')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: 'transparent', color: '#fff', cursor: 'pointer', fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 16.5, padding: '16px 30px', borderRadius: 'var(--radius-pill)', border: '1.5px solid rgba(255,255,255,0.45)', transition: 'border-color 200ms, background 200ms' }}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--gold-500, #c2a263)'; e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.45)'; e.currentTarget.style.background = 'transparent'; }}>
-              Enviar consulta por formulario
-            </button>
           </div>
 
           <p style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'rgba(255,255,255,0.5)', fontSize: 13.5, lineHeight: 1.55, maxWidth: 520, margin: '26px auto 0' }}>
@@ -4492,7 +4482,7 @@ const KLG_ROUTES = {
   'servicio:nomina': 'outsourcing-de-nomina/',
   'servicio:tributos': 'cumplimiento-tributario/',
   'servicio:costos': 'consultoria-costos/',
-  'servicio:conciliacion': 'conciliacion/',
+  'servicio:consultoria': 'consultoria-asesoria-contable-fiscal/',
   'blog': 'blog/',
   'contacto': 'contactanos/',
 };

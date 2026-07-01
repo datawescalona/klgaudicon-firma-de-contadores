@@ -19,7 +19,7 @@ Header con 5 categorías desplegables + Consultoría directo + botón CTA "Cont�
 
 Cada dropdown de categoría (desktop) es un grid de 2 columnas (ícono + título + descripción de una línea por hija) + un panel destacado a la derecha con imagen (vía `<image-slot>`, el usuario debe arrastrar su foto), badge "Más buscado", el nombre del servicio con más volumen de búsqueda de esa categoría, una frase de valor corta, y enlace "Quiero esto". No lleva "Ver todo X".
 
-- **Tributario** → `/cumplimiento-tributario/` — 5 hijas: Declaración de ISLR, Declaración de IVA, Declaración de IGTF, Declaración de IGP, Impuesto a las Pensiones. (Se quitaron "Retenciones de IVA" y "Retenciones de ISLR" — no van). Destacado: Declaración de IVA.
+- **Tributario** → `/cumplimiento-tributario/` — 5 hijas: Declaración de ISLR, Declaración de IVA, Declaración de IGTF, Declaración de IGP, Impuesto a las Pensiones. (Se quitaron "Retenciones de IVA" y "Retenciones de ISLR" — no van). Destacado: Declaración de ISLR.
 - **Auditorías** → `/auditorias/` — 6 hijas: Auditoría Financiera, de Gestión y Administrativa, de Estados Financieros, Interna, Externa, de Cumplimiento. (Se quitó "Auditoría de Sistemas" — no va). Destacado: Auditoría Financiera.
 - **Contable** → `/outsourcing-contable/` — 5 hijas sin cambios. Destacado: Conciliaciones Bancarias.
 - **Costos** → `/consultoria-costos/` — 3 hijas sin cambios. Destacado: Estructura de Costos.
