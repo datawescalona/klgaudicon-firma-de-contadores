@@ -1,0 +1,194 @@
+[
+  {
+    "path": "/",
+    "label": "Inicio",
+    "state": "Existente",
+    "parent": "Raíz"
+  },
+  {
+    "path": "/cumplimiento-tributario/",
+    "label": "Tributario",
+    "state": "Existente",
+    "parent": "Inicio"
+  },
+  {
+    "path": "/cumplimiento-tributario/declaracion-islr/",
+    "label": "Declaración de ISLR",
+    "state": "Candidata",
+    "parent": "/cumplimiento-tributario/"
+  },
+  {
+    "path": "/cumplimiento-tributario/declaracion-iva/",
+    "label": "Declaración de IVA",
+    "state": "Candidata",
+    "parent": "/cumplimiento-tributario/"
+  },
+  {
+    "path": "/cumplimiento-tributario/declaracion-igtf/",
+    "label": "Declaración de IGTF",
+    "state": "Candidata",
+    "parent": "/cumplimiento-tributario/"
+  },
+  {
+    "path": "/cumplimiento-tributario/declaracion-igp/",
+    "label": "Declaración de IGP",
+    "state": "Candidata",
+    "parent": "/cumplimiento-tributario/"
+  },
+  {
+    "path": "/cumplimiento-tributario/impuesto-pensiones/",
+    "label": "Impuesto a las Pensiones",
+    "state": "Candidata",
+    "parent": "/cumplimiento-tributario/"
+  },
+  {
+    "path": "/auditorias/",
+    "label": "Auditorías",
+    "state": "Existente",
+    "parent": "Inicio"
+  },
+  {
+    "path": "/auditorias/auditoria-financiera/",
+    "label": "Auditoría Financiera",
+    "state": "Candidata",
+    "parent": "/auditorias/"
+  },
+  {
+    "path": "/auditorias/auditoria-gestion-administrativa/",
+    "label": "Auditoría de Gestión y Administrativa",
+    "state": "Candidata",
+    "parent": "/auditorias/"
+  },
+  {
+    "path": "/auditorias/auditoria-estados-financieros/",
+    "label": "Auditoría de Estados Financieros",
+    "state": "Candidata",
+    "parent": "/auditorias/"
+  },
+  {
+    "path": "/auditorias/auditoria-interna/",
+    "label": "Auditoría Interna",
+    "state": "Candidata",
+    "parent": "/auditorias/"
+  },
+  {
+    "path": "/auditorias/auditoria-externa/",
+    "label": "Auditoría Externa",
+    "state": "Candidata",
+    "parent": "/auditorias/"
+  },
+  {
+    "path": "/auditorias/auditoria-cumplimiento/",
+    "label": "Auditoría de Cumplimiento",
+    "state": "Candidata",
+    "parent": "/auditorias/"
+  },
+  {
+    "path": "/outsourcing-contable/",
+    "label": "Contable",
+    "state": "Existente",
+    "parent": "Inicio"
+  },
+  {
+    "path": "/outsourcing-contable/conciliaciones-bancarias/",
+    "label": "Conciliaciones Bancarias",
+    "state": "Candidata",
+    "parent": "/outsourcing-contable/"
+  },
+  {
+    "path": "/outsourcing-contable/ajuste-por-inflacion/",
+    "label": "Ajuste por Inflación",
+    "state": "Candidata",
+    "parent": "/outsourcing-contable/"
+  },
+  {
+    "path": "/outsourcing-contable/libros-legales/",
+    "label": "Libros Legales",
+    "state": "Candidata",
+    "parent": "/outsourcing-contable/"
+  },
+  {
+    "path": "/outsourcing-contable/analisis-de-cuentas/",
+    "label": "Análisis de Cuentas",
+    "state": "Candidata",
+    "parent": "/outsourcing-contable/"
+  },
+  {
+    "path": "/outsourcing-contable/balances-de-comprobacion/",
+    "label": "Balances de Comprobación",
+    "state": "Candidata",
+    "parent": "/outsourcing-contable/"
+  },
+  {
+    "path": "/consultoria-costos/",
+    "label": "Costos",
+    "state": "Existente",
+    "parent": "Inicio"
+  },
+  {
+    "path": "/consultoria-costos/estructura-de-costos/",
+    "label": "Estructura de Costos",
+    "state": "Candidata",
+    "parent": "/consultoria-costos/"
+  },
+  {
+    "path": "/consultoria-costos/estudio-procesos-productivos/",
+    "label": "Estudio de Procesos Productivos",
+    "state": "Candidata",
+    "parent": "/consultoria-costos/"
+  },
+  {
+    "path": "/consultoria-costos/cadena-de-valor/",
+    "label": "Análisis de Cadena de Valor",
+    "state": "Candidata",
+    "parent": "/consultoria-costos/"
+  },
+  {
+    "path": "/outsourcing-de-nomina/",
+    "label": "Nómina",
+    "state": "Existente",
+    "parent": "Inicio"
+  },
+  {
+    "path": "/outsourcing-de-nomina/finiquitos-prestaciones/",
+    "label": "Finiquitos y Prestaciones",
+    "state": "Candidata",
+    "parent": "/outsourcing-de-nomina/"
+  },
+  {
+    "path": "/outsourcing-de-nomina/reportes-parafiscales-inces/",
+    "label": "Reportes Parafiscales",
+    "state": "Candidata",
+    "parent": "/outsourcing-de-nomina/"
+  },
+  {
+    "path": "/outsourcing-de-nomina/recibos-reportes-nomina/",
+    "label": "Recibos y Reportes de Nómina",
+    "state": "Candidata",
+    "parent": "/outsourcing-de-nomina/"
+  },
+  {
+    "path": "/consultoria-asesoria-contable-fiscal/",
+    "label": "Consultoría",
+    "state": "Candidata",
+    "parent": "Inicio"
+  },
+  {
+    "path": "/blog/",
+    "label": "Blog",
+    "state": "Existente",
+    "parent": "Inicio"
+  },
+  {
+    "path": "/contactanos/",
+    "label": "Contáctanos",
+    "state": "Existente",
+    "parent": "Inicio"
+  },
+  {
+    "path": "/tributos/",
+    "label": "Tributos — revisar solapamiento",
+    "state": "Existente",
+    "parent": "Inicio"
+  }
+]

@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>KLG · Gestión SEO</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#182a40;background:#f1f4f8}*{box-sizing:border-box}body{margin:0}header{padding:32px max(22px,5vw);background:#112d50;color:white}h1{margin:8px 0;font-size:32px}header p{color:#c8d8eb;max-width:850px}.eyebrow{color:#e9c56f;font-size:12px;letter-spacing:2px}main{max-width:1250px;margin:auto;padding:24px}nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}button,select,input,textarea{font:inherit;border:1px solid #b3c0cf;border-radius:7px;padding:10px}button{cursor:pointer;background:white;color:#17395f}nav button[aria-pressed=true],button.primary{background:#17395f;color:white}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #ba840e;outline-offset:2px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card,article,.notice{background:white;padding:20px;border-radius:12px;border:1px solid #dce3eb;margin-bottom:16px}.card strong{font-size:32px;display:block}.muted{color:#52647a}.notice{border-left:5px solid #b17c12}.layout{display:grid;grid-template-columns:330px 1fr;gap:20px}.list{max-height:760px;overflow:auto}.row{display:block;width:100%;text-align:left;margin:7px 0;background:white}.row span{display:block;font-size:12px;color:#52647a;word-break:break-all}.row[aria-pressed=true]{border:2px solid #17395f;background:#eaf1fa}.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{display:grid;gap:5px;font-size:14px}input,textarea,select{width:100%;background:white;color:#182a40}textarea{min-height:82px;resize:vertical}.full{grid-column:1/-1}small{display:block;line-height:1.6}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.toolbar>*{width:auto}code{overflow-wrap:anywhere}table{border-collapse:collapse;width:100%}td,th{padding:12px;border-bottom:1px solid #dce3eb;text-align:left;vertical-align:top}section[hidden]{display:none}.tag{font-size:12px;background:#edf1f6;border-radius:5px;padding:4px 8px}.steps{display:grid;grid-template-columns:1fr 1fr;gap:14px}.steps article{margin:0}footer{padding:24px;font-size:13px;color:#52647a}#feedback{min-height:24px;color:#245b3a}@media(max-width:760px){.cards,.fields,.steps{grid-template-columns:1fr 1fr}.layout{grid-template-columns:1fr}.list{max-height:260px}.full{grid-column:1/-1}main{padding:15px}h1{font-size:26px}}@media(max-width:450px){.cards,.fields,.steps{grid-template-columns:1fr}}@media print{nav,.toolbar,.list{display:none}.layout{display:block}header{background:white;color:black}}
+</style>
+<header><div class="eyebrow">KLG AUDICON / CONTROL DEL PROYECTO</div><h1>SEO · De cada búsqueda a una página útil</h1><p>Arquitectura, fichas por URL y evidencia de implementación. Inventario del 6 nov 2026 · Propuesta local pendiente de integración.</p></header>
+<main><nav aria-label="Vistas SEO"><button data-tab="summary" aria-pressed="true">Resumen</button><button data-tab="architecture" aria-pressed="false">Arquitectura y fichas</button><button data-tab="milestones" aria-pressed="false">Hitos</button><button data-tab="rules" aria-pressed="false">Reglas de código</button></nav>
+<div class="notice"><strong>Primero, validar la estrategia.</strong> Las URLs candidatas vienen del menú actual. No hay investigación de demanda ni agrupación SERP validada. El panel registra trabajo; no publica cambios ni garantiza posiciones.</div>
+<section id="summary"><div class="cards"><div class="card"><strong id="total"></strong>URLs inventariadas</div><div class="card"><strong>9</strong>Páginas 200 en la auditoría</div><div class="card"><strong>23</strong>Candidatas del menú</div><div class="card"><strong>0</strong>Grupos SERP validados aquí</div></div><article><h2>El orden de trabajo</h2><p>Negocio y mercado → investigación → agrupación de búsquedas → mapa aprobado → ficha de cada página → contenido y código → verificación → medición.</p><h3>Decisiones que faltan</h3><ul><li>Servicios prioritarios, cliente ideal y zonas atendidas.</li><li>Dominio preferido y datos de contacto reales.</li><li>Investigación con fuente, fecha, demanda e intención.</li><li>Resolver solapamientos entre servicios de auditoría y entre Tributos y Cumplimiento tributario.</li></ul><p>El mapa visual y el sitemap XML son entregables distintos. El XML incluirá solo URLs aprobadas e indexables; las candidatas no entrarán automáticamente.</p></article></section>
+<section id="architecture" hidden><div class="toolbar"><label>Buscar URL o servicio<input id="search" type="search" placeholder="Ej. auditoría"></label><label>Estado<select id="filter"><option value="">Todos</option><option>Existente</option><option>Candidata</option></select></label></div><div class="layout"><aside><h2>Mapa heredado</h2><small>Inicio → categoría → servicio. La jerarquía SEO final se decide después de investigar.</small><div class="list" id="url-list"></div></aside><article><h2 id="page-title"></h2><code id="page-path"></code><p id="page-state" class="muted"></p><form id="brief"><div class="fields" id="fields"></div><div class="toolbar"><button type="submit" class="primary">Guardar ficha local</button></div></form></article></div></section>
+<section id="milestones" hidden><h2>Hitos con evidencia</h2><p>Los estados son declarados manualmente. «Listo para revisión» requiere revisar la evidencia; no equivale a producción verificada.</p><div class="steps" id="steps"></div></section>
+<section id="rules" hidden><article><h2>Qué debe quedar comprobado en el código</h2><table><thead><tr><th>Control</th><th>Prueba requerida antes de cerrar</th></tr></thead><tbody>
+<tr><td>Ruta e intención</td><td>Registro aprobado sin duplicados. Revisar solapamientos con evidencia SERP.</td></tr><tr><td>Title, descripción y H1</td><td>Metadatos propios en HTML y encabezado principal comprobado en página renderizada.</td></tr><tr><td>Canonical e indexación</td><td>URL absoluta, dominio elegido y coherencia con robots, enlaces y sitemap.</td></tr><tr><td>Contenido y confianza</td><td>Servicio real, contenido específico, datos verificables y revisión profesional de afirmaciones fiscales.</td></tr><tr><td>Enlaces y rutas antiguas</td><td>Enlaces rastreables; destinos válidos y redirecciones directas aprobadas, sin cadenas.</td></tr><tr><td>Sitemap XML</td><td>Solo URLs 200, canónicas e indexables aprobadas; excluir panel, candidatas y errores. lastmod real u omitido.</td></tr><tr><td>Móvil y rendimiento</td><td>Inspección en tamaños reales y mediciones registradas, sin puntuaciones supuestas.</td></tr><tr><td>Publicación</td><td>Diff + pruebas + SHA + autorización; después versión activa y comprobación HTTP/renderizada.</td></tr>
+</tbody></table><p><strong>Estado:</strong> contrato preparado. Estas comprobaciones todavía no están conectadas al proceso de construcción de la web.</p><p><a href="ESTRATEGIA.md">Leer estrategia y criterios completos</a> · <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap">Guía oficial de sitemaps</a></p></article></section>
+<div class="toolbar"><button id="export">Exportar trabajo JSON</button><label>Importar trabajo JSON<input id="import" type="file" accept="application/json,.json"></label></div><div id="feedback" role="status" aria-live="polite"></div>
+</main><footer>Panel local sin conexión a GitHub ni Cloudflare. Guardado limitado a este navegador; exporta una copia para conservarlo. Los datos de la auditoría son una fotografía, no monitoreo en vivo.</footer>
+<script id="inventory" type="application/json">[
+  {
+    "path": "/",
+    "label": "Inicio",
+    "state": "Existente",
+    "parent": "Raíz"
+  },
+  {
+    "path": "/cumplimiento-tributario/",
+    "label": "Tributario",
+    "state": "Existente",
+    "parent": "Inicio"
+  },
+  {
+    "path": "/cumplimiento-tributario/declaracion-islr/",
+    "label": "Declaración de ISLR",
+    "state": "Candidata",
+    "parent": "/cumplimiento-tributario/"
+  },
+  {
+    "path": "/cumplimiento-tributario/declaracion-iva/",
+    "label": "Declaración de IVA",
+    "state": "Candidata",
+    "parent": "/cumplimiento-tributario/"
+  },
+  {
+    "path": "/cumplimiento-tributario/declaracion-igtf/",
+    "label": "Declaración de IGTF",
+    "state": "Candidata",
+    "parent": "/cumplimiento-tributario/"
+  },
+  {
+    "path": "/cumplimiento-tributario/declaracion-igp/",
+    "label": "Declaración de IGP",
+    "state": "Candidata",
+    "parent": "/cumplimiento-tributario/"
+  },
+  {
+    "path": "/cumplimiento-tributario/impuesto-pensiones/",
+    "label": "Impuesto a las Pensiones",
+    "state": "Candidata",
+    "parent": "/cumplimiento-tributario/"
+  },
+  {
+    "path": "/auditorias/",
+    "label": "Auditorías",
+    "state": "Existente",
+    "parent": "Inicio"
+  },
+  {
+    "path": "/auditorias/auditoria-financiera/",
+    "label": "Auditoría Financiera",
+    "state": "Candidata",
+    "parent": "/auditorias/"
+  },
+  {
+    "path": "/auditorias/auditoria-gestion-administrativa/",
+    "label": "Auditoría de Gestión y Administrativa",
+    "state": "Candidata",
+    "parent": "/auditorias/"
+  },
+  {
+    "path": "/auditorias/auditoria-estados-financieros/",
+    "label": "Auditoría de Estados Financieros",
+    "state": "Candidata",
+    "parent": "/auditorias/"
+  },
+  {
+    "path": "/auditorias/auditoria-interna/",
+    "label": "Auditoría Interna",
+    "state": "Candidata",
+    "parent": "/auditorias/"
+  },
+  {
+    "path": "/auditorias/auditoria-externa/",
+    "label": "Auditoría Externa",
+    "state": "Candidata",
+    "parent": "/auditorias/"
+  },
+  {
+    "path": "/auditorias/auditoria-cumplimiento/",
+    "label": "Auditoría de Cumplimiento",
+    "state": "Candidata",
+    "parent": "/auditorias/"
+  },
+  {
+    "path": "/outsourcing-contable/",
+    "label": "Contable",
+    "state": "Existente",
+    "parent": "Inicio"
+  },
+  {
+    "path": "/outsourcing-contable/conciliaciones-bancarias/",
+    "label": "Conciliaciones Bancarias",
+    "state": "Candidata",
+    "parent": "/outsourcing-contable/"
+  },
+  {
+    "path": "/outsourcing-contable/ajuste-por-inflacion/",
+    "label": "Ajuste por Inflación",
+    "state": "Candidata",
+    "parent": "/outsourcing-contable/"
+  },
+  {
+    "path": "/outsourcing-contable/libros-legales/",
+    "label": "Libros Legales",
+    "state": "Candidata",
+    "parent": "/outsourcing-contable/"
+  },
+  {
+    "path": "/outsourcing-contable/analisis-de-cuentas/",
+    "label": "Análisis de Cuentas",
+    "state": "Candidata",
+    "parent": "/outsourcing-contable/"
+  },
+  {
+    "path": "/outsourcing-contable/balances-de-comprobacion/",
+    "label": "Balances de Comprobación",
+    "state": "Candidata",
+    "parent": "/outsourcing-contable/"
+  },
+  {
+    "path": "/consultoria-costos/",
+    "label": "Costos",
+    "state": "Existente",
+    "parent": "Inicio"
+  },
+  {
+    "path": "/consultoria-costos/estructura-de-costos/",
+    "label": "Estructura de Costos",
+    "state": "Candidata",
+    "parent": "/consultoria-costos/"
+  },
+  {
+    "path": "/consultoria-costos/estudio-procesos-productivos/",
+    "label": "Estudio de Procesos Productivos",
+    "state": "Candidata",
+    "parent": "/consultoria-costos/"
+  },
+  {
+    "path": "/consultoria-costos/cadena-de-valor/",
+    "label": "Análisis de Cadena de Valor",
+    "state": "Candidata",
+    "parent": "/consultoria-costos/"
+  },
+  {
+    "path": "/outsourcing-de-nomina/",
+    "label": "Nómina",
+    "state": "Existente",
+    "parent": "Inicio"
+  },
+  {
+    "path": "/outsourcing-de-nomina/finiquitos-prestaciones/",
+    "label": "Finiquitos y Prestaciones",
+    "state": "Candidata",
+    "parent": "/outsourcing-de-nomina/"
+  },
+  {
+    "path": "/outsourcing-de-nomina/reportes-parafiscales-inces/",
+    "label": "Reportes Parafiscales",
+    "state": "Candidata",
+    "parent": "/outsourcing-de-nomina/"
+  },
+  {
+    "path": "/outsourcing-de-nomina/recibos-reportes-nomina/",
+    "label": "Recibos y Reportes de Nómina",
+    "state": "Candidata",
+    "parent": "/outsourcing-de-nomina/"
+  },
+  {
+    "path": "/consultoria-asesoria-contable-fiscal/",
+    "label": "Consultoría",
+    "state": "Candidata",
+    "parent": "Inicio"
+  },
+  {
+    "path": "/blog/",
+    "label": "Blog",
+    "state": "Existente",
+    "parent": "Inicio"
+  },
+  {
+    "path": "/contactanos/",
+    "label": "Contáctanos",
+    "state": "Existente",
+    "parent": "Inicio"
+  },
+  {
+    "path": "/tributos/",
+    "label": "Tributos — revisar solapamiento",
+    "state": "Existente",
+    "parent": "Inicio"
+  }
+]</script>
+<script>
+'use strict';
+const inventory=JSON.parse(document.getElementById('inventory').textContent);
+const key='klg-seo-draft-v1';let saved={version:1,briefs:{},milestones:{}};
+const msg=t=>document.getElementById('feedback').textContent=t;
+try{const s=JSON.parse(localStorage.getItem(key)||'null');if(s&&s.version===1&&s.briefs&&s.milestones)saved=s}catch{msg('El guardado del navegador no está disponible. Usa Exportar JSON.');}
+let selected=inventory[0]?.path;
+const fieldDefs=[['keyword','Palabra clave principal (propuesta)'],['secondary','Variantes secundarias'],['intent','Intención y etapa del cliente'],['market','Mercado y localización'],['volume','Volumen real (vacío si no hay dato)'],['volumeSource','Fuente, fecha y configuración del volumen'],['serp','Evidencia SERP: consultas, resultados, fecha y país'],['decision','Decisión: conservar, agrupar, crear o redirigir; motivo'],['objective','Objetivo y llamada a la acción'],['title','Title propuesto'],['description','Descripción propuesta'],['h1','H1 propuesto'],['content','Brief: necesidades, secciones y pruebas del servicio'],['canonical','Canonical propuesto (dominio por confirmar)'],['links','Enlaces de entrada y salida previstos'],['owner','Responsable'],['evidence','Evidencia de código / vista previa / producción y SHA'],['notes','Pendientes y bloqueos']];
+const milestones=[['H0','Negocio y dominio','Confirmar mercado, servicios, contacto y dominio.'],['H1','Investigar búsquedas','Export real, intención, demanda, país y fecha.'],['H2','Aprobar arquitectura','Resolver grupos, 23 candidatas, duplicados y redirecciones.'],['H3','Completar fichas y contenido','Oferta, metadatos, encabezados, CTA y revisión profesional.'],['H4','Implementar y validar código','Pruebas automáticas y renderizadas del build exacto.'],['H5','Verificar producción autorizada','Autorización, versión activa y comprobaciones públicas.'],['H6','Medir resultados','Search Console, indexación y solicitudes reales por periodo.']];
+const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text)n.textContent=text;if(cls)n.className=cls;return n};
+function persist(){try{localStorage.setItem(key,JSON.stringify(saved));msg('Borrador guardado en este navegador. No modifica la web.')}catch{msg('No se pudo guardar en este navegador. Exporta JSON antes de cerrar.')}}
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-tab]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));document.querySelectorAll('main>section').forEach(s=>s.hidden=s.id!==b.dataset.tab)});
+function list(){const q=document.getElementById('search').value.toLocaleLowerCase(),f=document.getElementById('filter').value,box=document.getElementById('url-list');box.replaceChildren();inventory.filter(r=>(!f||r.state===f)&&(r.path+' '+r.label).toLocaleLowerCase().includes(q)).forEach(r=>{const b=el('button',r.label,'row');b.type='button';b.setAttribute('aria-pressed',String(selected===r.path));b.append(el('span',r.path),el('span',r.state+' · '+r.parent));b.onclick=()=>{if(dirty&&!confirm('Hay cambios de ficha sin guardar. ¿Quieres descartarlos?'))return;selected=r.path;detail();list()};box.append(b)});if(!box.children.length)box.append(el('p','No hay resultados.'));}
+let dirty=false;
+function detail(){dirty=false;const r=inventory.find(r=>r.path===selected);if(!r)return;document.getElementById('page-title').textContent=r.label;document.getElementById('page-path').textContent=r.path;document.getElementById('page-state').textContent=r.state+' · '+r.parent+' · Asignación SEO pendiente de investigación';const fields=document.getElementById('fields');fields.replaceChildren();for(const [id,label]of fieldDefs){const l=el('label',label);const input=el(['serp','decision','content','links','evidence','notes'].includes(id)?'textarea':'input');input.name=id;input.value=typeof saved.briefs[r.path]?.[id]==='string'?saved.briefs[r.path][id]:'';input.maxLength=12000;input.oninput=()=>dirty=true;if(input.tagName==='TEXTAREA')l.className='full';l.append(input);fields.append(l)}}
+document.getElementById('brief').onsubmit=e=>{e.preventDefault();saved.briefs[selected]=Object.fromEntries(new FormData(e.target));dirty=false;persist()};
+function steps(){const box=document.getElementById('steps');box.replaceChildren();for(const [id,title,desc]of milestones){const a=el('article');a.append(el('span',id,'tag'),el('h3',title),el('p',desc));const l=el('label','Estado declarado');const s=el('select');['Pendiente','En curso','Bloqueado','Listo para revisión'].forEach(t=>{const o=el('option',t);s.append(o)});s.value=saved.milestones[id]?.state||'Pendiente';const e=el('textarea');e.placeholder='Evidencia, fecha, responsable, URL y SHA cuando corresponda';e.setAttribute('aria-label','Evidencia de '+id);e.value=saved.milestones[id]?.evidence||'';e.maxLength=12000;const save=()=>{saved.milestones[id]={state:s.value,evidence:e.value};persist()};s.onchange=save;e.onchange=save;l.append(s);a.append(l,e);box.append(a)}}
+document.getElementById('search').oninput=list;document.getElementById('filter').onchange=list;
+document.getElementById('export').onclick=()=>{if(dirty){msg('Guarda primero la ficha para incluir sus cambios en la exportación.');return}const a=el('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({...saved,exportedAt:new Date().toISOString()},null,2)],{type:'application/json'}));a.download='klg-seo-trabajo.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+document.getElementById('import').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>2000000)throw Error('El archivo supera 2 MB.');const x=JSON.parse(await file.text());if(x.version!==1||!x.briefs||!x.milestones)throw Error('Formato de trabajo no válido.');const clean={version:1,briefs:{},milestones:{}};for(const r of inventory){const b=x.briefs[r.path];if(b&&typeof b==='object'){clean.briefs[r.path]={};for(const [id]of fieldDefs)if(typeof b[id]==='string')clean.briefs[r.path][id]=b[id].slice(0,12000)}}for(const [id]of milestones){const m=x.milestones[id];if(m&&['Pendiente','En curso','Bloqueado','Listo para revisión'].includes(m.state))clean.milestones[id]={state:m.state,evidence:typeof m.evidence==='string'?m.evidence.slice(0,12000):''}}if(!confirm('Importar sustituirá el borrador local de fichas e hitos. Exporta primero si quieres conservarlo. ¿Continuar?'))return;saved=clean;persist();detail();steps();list()}catch(error){msg('No se importó: '+error.message)}finally{e.target.value=''}};
+window.onbeforeunload=e=>{if(dirty){e.preventDefault();e.returnValue=''}};
+document.getElementById('total').textContent=inventory.length;list();detail();steps();
+</script></html>
