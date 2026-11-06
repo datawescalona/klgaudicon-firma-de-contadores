@@ -1,0 +1,135 @@
+[
+  {
+    "id": "KLG-SEO-H0",
+    "project_id": "klg-audicon-web",
+    "title": "Definir negocio, mercado, dominio y conversión",
+    "status": "Pendiente",
+    "priority": "Alta",
+    "owner": "IA Manager / Williams",
+    "executor": "Codex cuando corresponda",
+    "module": 3,
+    "harness": "https://github.com/datawescalona/system-seo/blob/main/harnesses/modulo_03_keyword_research/ARNES.md",
+    "source": "Williams, 2026-11-06: gestionar SEO en el repositorio KLG con IA Manager y System SEO",
+    "evidence": [
+      "docs/seo/ESTRATEGIA.md",
+      "docs/seo/inventario-urls.json"
+    ],
+    "acceptance": "Ver criterios del hito H0 en docs/seo/ESTRATEGIA.md",
+    "depends_on": null,
+    "production_verified": false
+  },
+  {
+    "id": "KLG-SEO-H1",
+    "project_id": "klg-audicon-web",
+    "title": "Investigar demanda e intención con datos reales",
+    "status": "Pendiente",
+    "priority": "Alta",
+    "owner": "IA Manager / Williams",
+    "executor": "Codex cuando corresponda",
+    "module": 3,
+    "harness": "https://github.com/datawescalona/system-seo/blob/main/harnesses/modulo_03_keyword_research/ARNES.md",
+    "source": "Williams, 2026-11-06: gestionar SEO en el repositorio KLG con IA Manager y System SEO",
+    "evidence": [
+      "docs/seo/ESTRATEGIA.md",
+      "docs/seo/inventario-urls.json"
+    ],
+    "acceptance": "Ver criterios del hito H1 en docs/seo/ESTRATEGIA.md",
+    "depends_on": "KLG-SEO-H0",
+    "production_verified": false
+  },
+  {
+    "id": "KLG-SEO-H2",
+    "project_id": "klg-audicon-web",
+    "title": "Aprobar arquitectura y resolver candidatas por intención",
+    "status": "Pendiente",
+    "priority": "Alta",
+    "owner": "IA Manager / Williams",
+    "executor": "Codex cuando corresponda",
+    "module": 4,
+    "harness": "https://github.com/datawescalona/system-seo/blob/main/harnesses/modulo_04_arquitectura_seo/ARNES.md",
+    "source": "Williams, 2026-11-06: gestionar SEO en el repositorio KLG con IA Manager y System SEO",
+    "evidence": [
+      "docs/seo/ESTRATEGIA.md",
+      "docs/seo/inventario-urls.json"
+    ],
+    "acceptance": "Ver criterios del hito H2 en docs/seo/ESTRATEGIA.md",
+    "depends_on": "KLG-SEO-H1",
+    "production_verified": false
+  },
+  {
+    "id": "KLG-SEO-H3",
+    "project_id": "klg-audicon-web",
+    "title": "Completar fichas, contenido y metadatos por URL",
+    "status": "Pendiente",
+    "priority": "Alta",
+    "owner": "IA Manager / Williams",
+    "executor": "Codex cuando corresponda",
+    "module": 9,
+    "harness": "https://github.com/datawescalona/system-seo/blob/main/harnesses/modulo_09_metadatos/ARNES.md",
+    "source": "Williams, 2026-11-06: gestionar SEO en el repositorio KLG con IA Manager y System SEO",
+    "evidence": [
+      "docs/seo/ESTRATEGIA.md",
+      "docs/seo/inventario-urls.json"
+    ],
+    "acceptance": "Ver criterios del hito H3 en docs/seo/ESTRATEGIA.md",
+    "depends_on": "KLG-SEO-H2",
+    "production_verified": false
+  },
+  {
+    "id": "KLG-SEO-H4",
+    "project_id": "klg-audicon-web",
+    "title": "Implementar controles SEO y sitemap en el código",
+    "status": "Pendiente",
+    "priority": "Alta",
+    "owner": "IA Manager / Williams",
+    "executor": "Codex cuando corresponda",
+    "module": 13,
+    "harness": "https://github.com/datawescalona/system-seo/blob/main/harnesses/modulo_13_sitemap/ARNES.md",
+    "source": "Williams, 2026-11-06: gestionar SEO en el repositorio KLG con IA Manager y System SEO",
+    "evidence": [
+      "docs/seo/ESTRATEGIA.md",
+      "docs/seo/inventario-urls.json"
+    ],
+    "acceptance": "Ver criterios del hito H4 en docs/seo/ESTRATEGIA.md",
+    "depends_on": "KLG-SEO-H3",
+    "production_verified": false
+  },
+  {
+    "id": "KLG-SEO-H5",
+    "project_id": "klg-audicon-web",
+    "title": "Verificar indexabilidad después de publicación autorizada",
+    "status": "Pendiente",
+    "priority": "Alta",
+    "owner": "IA Manager / Williams",
+    "executor": "Codex cuando corresponda",
+    "module": 15,
+    "harness": "https://github.com/datawescalona/system-seo/blob/main/harnesses/modulo_15_indexacion/ARNES.md",
+    "source": "Williams, 2026-11-06: gestionar SEO en el repositorio KLG con IA Manager y System SEO",
+    "evidence": [
+      "docs/seo/ESTRATEGIA.md",
+      "docs/seo/inventario-urls.json"
+    ],
+    "acceptance": "Ver criterios del hito H5 en docs/seo/ESTRATEGIA.md",
+    "depends_on": "KLG-SEO-H4",
+    "production_verified": false
+  },
+  {
+    "id": "KLG-SEO-H6",
+    "project_id": "klg-audicon-web",
+    "title": "Medir resultados y solicitudes reales",
+    "status": "Pendiente",
+    "priority": "Alta",
+    "owner": "IA Manager / Williams",
+    "executor": "Codex cuando corresponda",
+    "module": 30,
+    "harness": "https://github.com/datawescalona/system-seo/blob/main/harnesses/modulo_30_google_search_console/ARNES.md",
+    "source": "Williams, 2026-11-06: gestionar SEO en el repositorio KLG con IA Manager y System SEO",
+    "evidence": [
+      "docs/seo/ESTRATEGIA.md",
+      "docs/seo/inventario-urls.json"
+    ],
+    "acceptance": "Ver criterios del hito H6 en docs/seo/ESTRATEGIA.md",
+    "depends_on": "KLG-SEO-H5",
+    "production_verified": false
+  }
+]

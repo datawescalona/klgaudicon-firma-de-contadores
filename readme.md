@@ -94,3 +94,8 @@ Auditoría (Financiera & Administrativa) · Outsourcing Contable · Outsourcing 
 
 ## Using the system
 Link `styles.css`, load `_ds_bundle.js` (auto-generated), then read components from `window.DesignSystem_b17006`. See any `components/**/*.card.html` for the exact mount pattern, and each component's `*.prompt.md` for usage + variants.
+
+## Gestión del proyecto
+
+- [Gestión con IA Manager](gestion/README.md)
+- [SEO: arquitectura, fichas e hitos](docs/seo/README.md)
