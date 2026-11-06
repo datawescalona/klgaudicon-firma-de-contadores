@@ -19,7 +19,7 @@ Wrangler ejecuta `npm run build` antes de publicar o iniciar la vista local. No 
 
 ## Configuración
 
-- `wrangler.json` identifica el Worker existente y sirve `dist/`.
+- `wrangler.jsonc` identifica el Worker existente y sirve `dist/`. Es el unico archivo de configuracion de Wrangler.
 - Se conserva la fecha de compatibilidad observada en el panel: `2026-07-01`.
 - No se añaden bases de datos, permisos, secretos ni servicios de pago.
 - `_headers` añade protección frente a interpretación errónea de contenido, incrustación en otros orígenes y acceso a cámara, micrófono y ubicación. La política CSP actual es parcial: no limita scripts mientras siga existiendo Babel en el navegador y código inline.
@@ -34,6 +34,12 @@ El usuario confirmó el 5 de noviembre de 2026 que teléfono, correo y RIF sigue
 Publicar un commit en `main` inicia la integración de Cloudflare. Verificar que la compilación termina, que la versión activa cambia y que la web muestra los cambios. Una compilación correcta por sí sola no demuestra que producción haya cambiado: el panel puede mostrar versiones cargadas sin tráfico.
 
 Antes de esta revisión, la versión con el 100 % de tráfico era `8475f6d5`. Conservarla como referencia de reversión; no activar versiones intermedias sin revisarlas.
+
+## Conciliacion de la propuesta automatica de Cloudflare
+
+La propuesta automatica #2 de Cloudflare parte del mismo `main` y agrega un `wrangler.jsonc` con `assets.directory` igual a `.`. Este lote conserva su nombre de Worker y fecha de compatibilidad, y utiliza el mismo nombre de archivo de configuracion. La publicacion se limita a `dist/` mediante el constructor revisado, en lugar de ofrecer el contenido completo de la raiz del repositorio.
+
+No agregar tambien `wrangler.json` ni integrar ambas propuestas sin resolver el archivo compartido. La configuracion automatica anterior queda cubierta por esta propuesta mas completa; su existencia no demuestra que las correcciones de este lote esten activas en produccion.
 
 ## Referencias oficiales
 

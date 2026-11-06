@@ -8,7 +8,7 @@ test('public output preserves pages and component loaders without publishing rep
   await build();
   const output = resolve(root, 'dist');
   const names = await readdir(output);
-  for (const forbidden of ['.git', '.env', 'CLAUDE.md', 'SKILL.md', 'readme.md', 'scripts', 'tests', 'node_modules', 'wrangler.json', 'package.json', 'ui_kits', 'templates']) {
+  for (const forbidden of ['.git', '.env', 'CLAUDE.md', 'SKILL.md', 'readme.md', 'scripts', 'tests', 'node_modules', 'wrangler.json', 'wrangler.jsonc', 'package.json', 'ui_kits', 'templates']) {
     assert.ok(!names.includes(forbidden), `${forbidden} must not be public`);
   }
   for (const page of pages) {

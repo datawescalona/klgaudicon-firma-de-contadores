@@ -1,7 +1,7 @@
 # KLG AUDICON — contexto persistente
 
 ## Arquitectura
-- Sitio estático servido en GitHub Pages.
+- Sitio estático alojado en Cloudflare Workers, servicio `klgaudicon-firma-de-contadores`. La configuracion versionada es `wrangler.jsonc` y el constructor prepara los activos publicos en `dist/`.
 - `components/header.html` y `components/footer.html` son el ÚNICO origen de esos componentes — no duplicar su contenido, editar solo ahí. Cada página los inyecta vía loader.
 - CSS modularizado en `css/`: `variables.css`, `layout.css`, `header.css`, `footer.css`, `buttons.css`, `forms.css`, `cards.css`, `responsive.css`.
 - JS organizado en `main.js`, `components.js`, `menu.js`, `utils.js`.
@@ -30,6 +30,6 @@ Cada dropdown de categoría (desktop) es un grid de 2 columnas (ícono + título
 Datos del menú (incluye `featured` por categoría) en `ui_kits/website/data.js` (`KLG_NAV_MENU`), lógica del dropdown en `components/header.html` (`CatDropdown`).
 
 ## Pendiente (próxima etapa)
-- Crear las 27 páginas hijas del submenú (declaracion-islr, auditoria-financiera, etc.) y `/consultoria-asesoria-contable-fiscal/` — hoy esos enlaces dan 404 a propósito, se construyen página por página.
+- Crear las 22 páginas hijas actuales del submenú (declaracion-islr, auditoria-financiera, etc.) y `/consultoria-asesoria-contable-fiscal/`: 23 destinos pendientes en total. Hoy esos enlaces dan 404 a propósito, se construyen página por página.
 - El usuario debe arrastrar una foto real a cada `<image-slot>` de los paneles destacados del menú (uno por categoría).
 - "Blog" existe como sección del sitio pero NO va en el header — vive en el footer.
